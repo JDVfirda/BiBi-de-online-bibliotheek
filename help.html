@@ -3,120 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help</title>
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-  <!-- Your CSS -->
+  <title>Help - BiBi.nl</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container">
     <a class="navbar-brand" href="index.html">BiBi.nl</a>
-
     <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="menu">
-    <ul class="navbar-nav ms-auto">
-
-  <li class="nav-item ms-3">
-    <a href="#" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
-  Log in
-</a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link text-white" href="index.html">Home</a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link text-white" href="catalog.html">Catalogus</a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link text-white" href="mybooks.html">Mijn Boeken</a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link text-white" href="account.html">Account</a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link active" href="help.html">Help</a>
-  </li>
-
-</ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item ms-3">
+          <a href="#" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</a>
+        </li>
+        <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="catalog.html">Catalogus</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="mybooks.html">Mijn Boeken</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="account.html">Account</a></li>
+        <li class="nav-item"><a class="nav-link active" href="help.html">Help</a></li>
+      </ul>
     </div>
   </div>
 </nav>
 
-<!-- help content -->
-<help class="container my-5">
+<!-- Help Content -->
+<section class="container my-5">
   <h1>Contact</h1>
   <p>Hier komt contactinformatie.</p>
   <h2>FAQ</h2>
   <p>Hier komen veel gestelde vragen en hun antwoorden.</p>
-</help>>
+</section>
 
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1">
-
   <div class="modal-dialog">
     <div class="modal-content">
-
       <div class="modal-header">
         <h5 class="modal-title">Inloggen</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
-
       <div class="modal-body">
-
         <form>
           <div class="mb-3">
             <label class="form-label">Gebruikersnaam/E-mail</label>
             <input type="text" class="form-control">
           </div>
-
           <div class="mb-3">
             <label class="form-label">Wachtwoord</label>
             <input type="password" class="form-control">
           </div>
-
-          <button type="submit" class="btn btn-primary w-100">
-            Inloggen
-          </button>
-          <a href="register.html" class="register d-block text-center text-primary mt-3">
-            Nog geen account? Klik hier!
-          </a>
-          <a href="lostPassword.html" class="register d-block text-center text-primary mt-3">
-            Wachtwoord vergeten?
-          </a>
+          <button type="submit" class="btn btn-primary w-100">Inloggen</button>
+          <a href="register.html" class="d-block text-center text-primary mt-3">Nog geen account? Klik hier!</a>
+          <a href="lostpassword.html" class="d-block text-center text-primary mt-3">Wachtwoord vergeten?</a>
         </form>
-
       </div>
-
     </div>
   </div>
-
 </div>
 
 <!-- Footer -->
 <footer class="footer text-center p-1">
-  <p class="mb-0">BiBi</p>
+  <p class="mb-0">© 2026 BiBi.nl</p>
 </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
-<!-- my JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/script.js"></script>
-
 </body>
 </html>

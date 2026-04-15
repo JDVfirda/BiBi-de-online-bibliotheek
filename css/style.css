@@ -1,6 +1,6 @@
 .hero {
   background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
-    url("../Images/Boekenkast-home-achtergrond.jpeg");
+    url("../images/boekenkast-home-achtergrond.jpeg");
 
   background-size: cover;
   background-position: center;
