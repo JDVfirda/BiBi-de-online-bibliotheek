@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BiBi.nl</title>
+  <title>Cataloog</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -13,6 +13,7 @@
 </head>
 
 <body>
+
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container">
@@ -26,17 +27,17 @@
     <ul class="navbar-nav ms-auto">
 
   <li class="nav-item ms-3">
-    <a href="#" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
+   <a href="#" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">
   Log in
 </a>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link active" href="index.html">Home</a>
+    <a class="nav-link text-white" href="index.html">Home</a>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link text-white" href="catalog.html">Catalogus</a>
+    <a class="nav-link active" href="catalog.html">Catalogus</a>
   </li>
 
   <li class="nav-item">
@@ -56,45 +57,22 @@
   </div>
 </nav>
 
-<section class="hero text-center">
+<!-- catalog content -->
+ 
+ <!-- Search bar -->
+<div class="w-50 mx-auto mt-5 mb-4">
+  <form class="d-flex">
+    <input type="text" id="search" class="form-control me-2" placeholder="Zoek boeken...">
+    <button class="btn btn-primary">Zoek</button>
+  </form>
+</div>
 
-  <div class="container">
+<!-- Catalog -->
+<div class="catalog-container">
+  <div class="row" id="catalog"></div>
+</div>
 
-    <!-- Title -->
-    <h1 class="display-2 fw-bold hero-title">
-      Welkom bij <span class="highlight">BiBi</span>
-    </h1>
 
-    <p class="lead hero-subtitle">
-      De online bibliotheek voor al je leesbehoeften
-    </p>
-
-    <a href="Register.html" class="btn btn-primary btn-lg mb-5">
-      Registreer nu!
-    </a>
-
-    <!-- Cards -->
-    <div class="row justify-content-center g-4">
-
-      <div class="col-md-4 d-flex">
-        <div class="card p-3 shadow w-100">
-          <h3>Wij hebben meer dan 13 boeken!</h3>
-          <a href="catalog.html" class="btn btn-outline-primary w-100">Bekijk catalogus</a>
-        </div>
-      </div>
-
-      <div class="col-md-4 d-flex">
-        <div class="card p-3 shadow w-100">
-          <h3>Hulp nodig? Wij helpen u graag!</h3>
-          <a href="help.html" class="btn btn-outline-primary w-100">Help!</a>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
 
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1">
@@ -109,7 +87,7 @@
 
       <div class="modal-body">
 
-        <form>
+       <form>
           <div class="mb-3">
             <label class="form-label">Gebruikersnaam/E-mail</label>
             <input type="text" class="form-control">
@@ -147,7 +125,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 <!-- my JS -->
-<script src="js/script.js"></script>
+<script src="js/catalog.js"></script>
 
 </body>
 </html>
