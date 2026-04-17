@@ -1,7 +1,6 @@
 const catalog = document.getElementById('catalog');
 
 const books = [
-  { title: "Harry Potter", author: "J.K. Rowling", img: "https://via.placeholder.com/150x200" },
   { title: "The Hobbit", author: "J.R.R. Tolkien", img: "https://via.placeholder.com/150x200" },
   { title: "1984", author: "George Orwell", img: "https://via.placeholder.com/150x200" },
   { title: "The Alchemist", author: "Paulo Coelho", img: "https://via.placeholder.com/150x200" },
