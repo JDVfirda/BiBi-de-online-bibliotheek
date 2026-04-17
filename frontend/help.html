@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help - BiBi.nl</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">BiBi.nl</a>
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item ms-3">
+          <a href="#" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</a>
+        </li>
+        <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="catalog.html">Catalogus</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="mybooks.html">Mijn Boeken</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="account.html">Account</a></li>
+        <li class="nav-item"><a class="nav-link active" href="help.html">Help</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Help Content -->
+<section class="container my-5">
+  <h1>Contact</h1>
+  <li>Telefoon: 0123-456789</li>
+  <li>E-mail: info@bibi.nl</li>
+  <li>Adres: Bibliotheekstraat 1, 1234 AB, Stad</li>
+  <h2>FAQ</h2>
+  <li>Moet ik een account aanmaken om boeken te lenen?
+    <p>Ja, een account is nodig om boeken te lenen en je uitleengeschiedenis bij te houden.</p>
+  </li>
+  <li>Hoe kan ik mijn wachtwoord resetten?
+    <p>Klik op "Wachtwoord vergeten?" op de inlogpagina en volg de instructies om je wachtwoord te resetten.</p>
+  </li>
+  <li>Kan ik boeken reserveren?
+    <p>Ja, je kunt boeken reserveren via de catalogus. Klik op het boek dat je wilt reserveren en volg de stappen.</p>
+  </li>
+  <li>Wat zijn de openingstijden van de bibliotheek?
+    <p>Onze openingstijden zijn maandag tot en met vrijdag van 9:00 tot 18:00 uur, en zaterdag van 10:00 tot 16:00 uur.</p>
+  </li> krijg ik een melding als mijn gereserveerde boek beschikbaar is?
+    <p>Ja, je ontvangt een e-mailmelding zodra je gereserveerde boek beschikbaar is om te lenen.</p>
+  </li>Krijg ik een digitale versie van het boek als ik een boek leen?
+    <p>Ja, je kunt een digitale versie van het boek downloaden als het beschikbaar is.</p>
+  </li> Hoe kan ik contact opnemen met de klantenservice?
+    <p>Je kunt contact opnemen met onze klantenservice via telefoon, e-mail of door langs te komen in de bibliotheek tijdens openingstijden.</p>
+  </li> Wat moet ik doen als ik een boek beschadigd terugbreng?
+    <p>Neem contact op met onze klantenservice om de situatie te bespreken. Afhankelijk van de schade kunnen er kosten in rekening worden gebracht.</p>
+    wat is het maximale aantal boeken dat ik kan lenen?
+    <p>Het maximale aantal boeken dat je kunt lenen is 5. Dit kan variëren afhankelijk van je accountstatus en eventuele speciale regels voor bepaalde boeken.</p>
+  </li> Wat is de maximale uitleentijd voor een boek?
+    <p>De maximale uitleentijd voor een boek is 3 weken. Je kunt boeken verlengen als er geen reserveringen zijn voor dat boek.</p>
+  </li> Wat gebeurt er als ik een boek te laat terugbreng?
+    <p>Als je een boek te laat terugbrengt, kunnen er boetes in rekening worden gebracht. De hoogte van de boete hangt af van hoe lang het boek te laat is.</p>
+  </li> Wat moet ik doen als ik een boek kwijt ben?
+    <p>Neem contact op met onze klantenservice om de situatie te bespreken. Afhankelijk van het boek kunnen er kosten in rekening worden gebracht voor het vervangen van het boek.</p>
+  </li> Wat moet ik doen als ik een boek wil verlengen?
+    <p>Je kunt boeken verlengen via je accountpagina, zolang er geen reserveringen zijn voor dat boek. Klik op het boek dat je wilt verlengen en volg de instructies.</p>
+  </li> Wat moet ik doen als ik een boek wil reserveren?
+    <p>Je kunt boeken reserveren via de catalogus. Klik op het boek dat je wilt reserveren en volg de stappen om je reservering te voltooien.</p>
+  </li> Wat moet ik doen als ik een boek wil terugbrengen?
+    <p>Je kunt boeken terugbrengen tijdens onze openingstijden. Breng het boek naar de balie of gebruik de inleverbox als deze beschikbaar is.</p>
+</section>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Inloggen</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Gebruikersnaam/E-mail</label>
+            <input type="text" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Wachtwoord</label>
+            <input type="password" class="form-control">
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Inloggen</button>
+          <a href="register.html" class="d-block text-center text-primary mt-3">Nog geen account? Klik hier!</a>
+          <a href="lostpassword.html" class="d-block text-center text-primary mt-3">Wachtwoord vergeten?</a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer text-center p-1">
+  <p class="mb-0">© 2026 BiBi.nl</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

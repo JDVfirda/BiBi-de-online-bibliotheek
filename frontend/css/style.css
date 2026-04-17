@@ -1,0 +1,103 @@
+.hero {
+  background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url("../images/boekenkast-home-achtergrond.jpeg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  height: 90.7vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+  color: white;
+}
+
+.hero-title {
+  font-size: 70px;
+  font-weight: bold;
+}
+.highlight {
+  font-size: 100px;
+  color: #007bff; /* Bootstrap's primary blue color */
+}
+.hero-subtitle {
+  font-size: 30px;
+}
+.footer {
+  background-color: #0d6efd; /* Bootstrap blue */
+  color: white;
+}
+.nav-link {
+  transition: 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  border-bottom: 2px solid rgba(255,255,255,0.5);
+}
+
+.navbar-nav .nav-link.active {
+  color: #e0e0e0;
+  border-bottom: 2px solid white;
+}
+
+
+.log-in {
+  text-decoration: none;
+}
+
+.log-in:hover {
+  text-decoration: underline;
+}
+.register {
+  text-decoration: none;
+}
+
+.register:hover {
+  text-decoration: underline;
+}
+
+.catalog-container {
+  max-height: 600px;   /* Scrollable area */
+  overflow-y: auto;
+  padding: 0 15px;
+}
+
+.book-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  background-color: #f8f9fa;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.book-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.book-card-body {
+  padding: 15px;
+}
+
+.book-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.book-card-author {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 10px;
+}
