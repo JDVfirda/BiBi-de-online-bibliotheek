@@ -34,44 +34,230 @@
 <!-- Help Content -->
 <section class="container my-5">
   <h1>Contact</h1>
-  <li>Telefoon: 0123-456789</li>
-  <li>E-mail: info@bibi.nl</li>
-  <li>Adres: Bibliotheekstraat 1, 1234 AB, Stad</li>
-  <h2>FAQ</h2>
-  <li>Moet ik een account aanmaken om boeken te lenen?
-    <p>Ja, een account is nodig om boeken te lenen en je uitleengeschiedenis bij te houden.</p>
-  </li>
-  <li>Hoe kan ik mijn wachtwoord resetten?
-    <p>Klik op "Wachtwoord vergeten?" op de inlogpagina en volg de instructies om je wachtwoord te resetten.</p>
-  </li>
-  <li>Kan ik boeken reserveren?
-    <p>Ja, je kunt boeken reserveren via de catalogus. Klik op het boek dat je wilt reserveren en volg de stappen.</p>
-  </li>
-  <li>Wat zijn de openingstijden van de bibliotheek?
-    <p>Onze openingstijden zijn maandag tot en met vrijdag van 9:00 tot 18:00 uur, en zaterdag van 10:00 tot 16:00 uur.</p>
-  </li> krijg ik een melding als mijn gereserveerde boek beschikbaar is?
-    <p>Ja, je ontvangt een e-mailmelding zodra je gereserveerde boek beschikbaar is om te lenen.</p>
-  </li>Krijg ik een digitale versie van het boek als ik een boek leen?
-    <p>Ja, je kunt een digitale versie van het boek downloaden als het beschikbaar is.</p>
-  </li> Hoe kan ik contact opnemen met de klantenservice?
-    <p>Je kunt contact opnemen met onze klantenservice via telefoon, e-mail of door langs te komen in de bibliotheek tijdens openingstijden.</p>
-  </li> Wat moet ik doen als ik een boek beschadigd terugbreng?
-    <p>Neem contact op met onze klantenservice om de situatie te bespreken. Afhankelijk van de schade kunnen er kosten in rekening worden gebracht.</p>
-    wat is het maximale aantal boeken dat ik kan lenen?
-    <p>Het maximale aantal boeken dat je kunt lenen is 5. Dit kan variëren afhankelijk van je accountstatus en eventuele speciale regels voor bepaalde boeken.</p>
-  </li> Wat is de maximale uitleentijd voor een boek?
-    <p>De maximale uitleentijd voor een boek is 3 weken. Je kunt boeken verlengen als er geen reserveringen zijn voor dat boek.</p>
-  </li> Wat gebeurt er als ik een boek te laat terugbreng?
-    <p>Als je een boek te laat terugbrengt, kunnen er boetes in rekening worden gebracht. De hoogte van de boete hangt af van hoe lang het boek te laat is.</p>
-  </li> Wat moet ik doen als ik een boek kwijt ben?
-    <p>Neem contact op met onze klantenservice om de situatie te bespreken. Afhankelijk van het boek kunnen er kosten in rekening worden gebracht voor het vervangen van het boek.</p>
-  </li> Wat moet ik doen als ik een boek wil verlengen?
-    <p>Je kunt boeken verlengen via je accountpagina, zolang er geen reserveringen zijn voor dat boek. Klik op het boek dat je wilt verlengen en volg de instructies.</p>
-  </li> Wat moet ik doen als ik een boek wil reserveren?
-    <p>Je kunt boeken reserveren via de catalogus. Klik op het boek dat je wilt reserveren en volg de stappen om je reservering te voltooien.</p>
-  </li> Wat moet ik doen als ik een boek wil terugbrengen?
-    <p>Je kunt boeken terugbrengen tijdens onze openingstijden. Breng het boek naar de balie of gebruik de inleverbox als deze beschikbaar is.</p>
+  <ul>
+    <li>Telefoon: 0123-456789</li>
+    <li>E-mail: info@bibi.nl</li>
+    <li>Adres: Bibliotheekstraat 1, 1234 AB, Stad</li>
+  </ul>
+
+  <h2 class="mt-4">Veelgestelde vragen</h2>
+
+  <div class="accordion" id="faqAccordion">
+
+    <!-- 1 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#q1">
+          Moet ik een account aanmaken om boeken te lenen?
+        </button>
+      </h2>
+      <div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Ja, een account is nodig om boeken te lenen en je uitleengeschiedenis bij te houden.
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q2">
+          Hoe kan ik mijn wachtwoord resetten?
+        </button>
+      </h2>
+      <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Klik op "Wachtwoord vergeten?" op de inlogpagina en volg de instructies.
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q3">
+          Kan ik boeken reserveren?
+        </button>
+      </h2>
+      <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Ja, je kunt boeken reserveren via de catalogus.
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q4">
+          Wat zijn de openingstijden van de bibliotheek?
+        </button>
+      </h2>
+      <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Maandag t/m vrijdag: 09:00 – 18:00<br>
+          Zaterdag: 10:00 – 16:00
+        </div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q5">
+          Krijg ik een melding als mijn gereserveerde boek beschikbaar is?
+        </button>
+      </h2>
+      <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Ja, je ontvangt een e-mailmelding zodra je boek beschikbaar is.
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q6">
+          Krijg ik een digitale versie van het boek?
+        </button>
+      </h2>
+      <div id="q6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Ja, als het boek beschikbaar is kun je een digitale versie downloaden.
+        </div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q7">
+          Hoe kan ik contact opnemen met de klantenservice?
+        </button>
+      </h2>
+      <div id="q7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Via telefoon, e-mail of door langs te komen tijdens openingstijden.
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q8">
+          Wat moet ik doen als ik een boek beschadigd terugbreng?
+        </button>
+      </h2>
+      <div id="q8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Neem contact op met de klantenservice. Mogelijk worden kosten in rekening gebracht.
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q9">
+          Wat is het maximale aantal boeken dat ik kan lenen?
+        </button>
+      </h2>
+      <div id="q9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Je kunt maximaal 5 boeken lenen, afhankelijk van je accountstatus.
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q10">
+          Wat is de maximale uitleentijd?
+        </button>
+      </h2>
+      <div id="q10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          De uitleentijd is 3 weken. Verlengen is mogelijk als er geen reservering is.
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q11">
+          Wat gebeurt er als ik een boek te laat terugbreng?
+        </button>
+      </h2>
+      <div id="q11" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Er kunnen boetes in rekening worden gebracht afhankelijk van de vertraging.
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q12">
+          Wat moet ik doen als ik een boek kwijt ben?
+        </button>
+      </h2>
+      <div id="q12" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Neem contact op met de klantenservice. Er kunnen vervangingskosten gelden.
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q13">
+          Hoe kan ik een boek verlengen?
+        </button>
+      </h2>
+      <div id="q13" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Via je accountpagina, zolang er geen reserveringen zijn.
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q14">
+          Hoe kan ik een boek reserveren?
+        </button>
+      </h2>
+      <div id="q14" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Via de catalogus. Selecteer het boek en volg de stappen.
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q15">
+          Hoe kan ik een boek terugbrengen?
+        </button>
+      </h2>
+      <div id="q15" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+        <div class="accordion-body">
+          Breng het boek naar de balie of gebruik de inleverbox.
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
+
 
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1">
