@@ -17,7 +17,7 @@ function registreer(event) {
         return;
     }
 
-    fetch('../backend/klanten.php', {
+    fetch('backend/klanten.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

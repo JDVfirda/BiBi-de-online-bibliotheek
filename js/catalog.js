@@ -2,7 +2,7 @@ const catalog = document.getElementById('catalog');
 
 
 function loadBooks() {
-    fetch('../backend/boeken.php')
+    fetch('backend/boeken.php')
         .then(response => response.json())
         .then(books => {
             displayBooks(books);
