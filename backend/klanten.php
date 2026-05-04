@@ -33,12 +33,12 @@ switch ($methode) {
         $achternaam = $verbinding->real_escape_string($data['achternaam']);
         $gebruikersnaam = $verbinding->real_escape_string($data['gebruikersnaam']);
         $email = $verbinding->real_escape_string($data['email']);
+        $telefoonnummer = $verbinding->real_escape_string($data['telefoonnummer']);
         $wachtwoord = password_hash($data['wachtwoord'], PASSWORD_BCRYPT);
-        $telefoon = $verbinding->real_escape_string($data['telefoon']);
 
 
         $sql = "INSERT INTO klanten (voornaam, achternaam, gebruikersnaam, email, wachtwoord, telefoon)
-                VALUES ('$voornaam', '$achternaam', '$gebruikersnaam', '$email', '$wachtwoord', '$telefoon')";
+                VALUES ('$voornaam', '$achternaam', '$gebruikersnaam', '$email', '$wachtwoord', '$telefoonnummer')";
 
         if ($verbinding->query($sql)) {
             echo json_encode(['succes' => true]);

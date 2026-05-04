@@ -34,30 +34,34 @@
 <!-- Register Form -->
 <section class="container my-5">
   <div class="mx-auto" style="max-width: 400px;">
-    <form>
+    <form onsubmit="registreer(event)">
       <div class="mb-3">
-        <label class="form-label">Naam</label>
-        <input type="text" class="form-control" required>
+        <label class="form-label">Voornaam</label>
+        <input type="text" id="voornaam" class="form-control" required>
       </div>
       <div class="mb-3">
         <label class="form-label">Achternaam</label>
-        <input type="text" class="form-control" required>
+        <input type="text" id="achternaam"class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Gebruikersnaam</label>
+        <input type="text" id="gebruikersnaam"class="form-control" required>
       </div>
       <div class="mb-3">
         <label class="form-label">E-mail</label>
-        <input type="email" class="form-control" required>
+        <input type="email" id="email" class="form-control" required>
       </div>
       <div class="mb-3">
-        <label class="form-label">Telefoon nummer</label>
-        <input type="text" class="form-control">
+        <label class="form-label">Telefoonnummer</label>
+        <input type="text" id="telefoonnummer" class="form-control">
       </div>
       <div class="mb-3">
         <label class="form-label">Wachtwoord</label>
-        <input type="password" class="form-control" required>
+        <input type="password" id="wachtwoord" class="form-control" required>
       </div>
       <div class="mb-3">
-        <label class="form-label">Wachtwoord nogmaals</label>
-        <input type="password" class="form-control" required>
+        <label class="form-label">Herhaal wachtwoord</label>
+        <input type="password" id="wachtwoord_herhaald" class="form-control" required>
       </div>
       <button type="submit" class="btn btn-primary w-100">Registreer</button>
       <a href="#" class="d-block text-center text-primary mt-3" data-bs-toggle="modal" data-bs-target="#loginModal">Heb je al een account? Klik hier!</a>
@@ -98,6 +102,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/script.js"></script>
+<script src="js/register.js"></script>
 </body>
 </html>

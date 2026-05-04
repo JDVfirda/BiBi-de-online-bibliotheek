@@ -6,7 +6,10 @@ $wachtwoord = "";
 $database = "bibliotheeknieuw";
 
 try {
-    $verbinding = new mysqli($host, $gebruiker, $wachtwoord, $database);
+    $verbinding = new mysqli(hostname: $host, 
+                            username: $gebruiker, 
+                            password: $wachtwoord, 
+                            database: $database);
     $verbinding->set_charset("utf8");
 
 } catch (Exception $e) {
