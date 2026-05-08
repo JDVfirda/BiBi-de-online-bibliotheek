@@ -2,6 +2,17 @@
    GLOBAL (used everywhere)
    ========================= */
 
+   /* body */
+   html, body {
+    height:auto;
+    margin: 0%
+  ;
+}
+
+body {
+    min-height: 100vh;
+    display: block;
+}
 /* Footer */
 .footer {
   background-color: #0d6efd;
@@ -41,9 +52,8 @@
    ========================= */
 
 /* Catalog */
+
 .catalog-container {
-  max-height: 600px;
-  overflow-y: auto;
   padding: 0 15px;
 }
 

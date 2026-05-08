@@ -42,10 +42,11 @@
 </div>
 
 <!-- Catalog -->
-<div class="catalog-container">
-  <div class="row" id="catalog"></div>
-</div>
-
+<main class="flex-grow-1">
+  <div class="container-fluid catalog-container">
+    <div class="row" id="catalog"></div>
+  </div>
+</main>
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1">
   <div class="modal-dialog">
@@ -69,6 +70,58 @@
           <a href="lostpassword.html" class="d-block text-center text-primary mt-3">Wachtwoord vergeten?</a>
         </form>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- view book Modal -->
+<div class="modal fade" id="bookModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body text-center">
+
+  <!-- Book image -->
+  <img 
+    id="modalImage"
+    class="img-fluid rounded mb-3"
+    style="
+      max-height: 450px;
+      transition: transform 0.3s ease;
+      cursor: zoom-in;
+    "
+  >
+
+  <!-- Front / Back buttons -->
+  <div class="d-flex justify-content-center gap-2 mb-4">
+    <button class="btn btn-outline-primary btn-sm" id="showFront">
+      Voorkant
+    </button>
+
+    <button class="btn btn-outline-secondary btn-sm" id="showBack">
+      Achterkant
+    </button>
+  </div>
+
+  <!-- Book info -->
+  <p><strong>Auteur:</strong> <span id="modalAuthor"></span></p>
+  <p><strong>Uitgever:</strong> <span id="modalPublisher"></span></p>
+  <p><strong>Jaar:</strong> <span id="modalYear"></span></p>
+  <p><strong>Genre:</strong> <span id="modalGenre"></span></p>
+  <p><strong>ISBN:</strong> <span id="modalISBN"></span></p>
+
+</div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ga terug</button>
+        <button class="btn btn-primary" id="borrowBookBtn">Leen boek</button>
+      </div>
+    
     </div>
   </div>
 </div>
