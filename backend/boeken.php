@@ -30,13 +30,12 @@ switch ($methode) {
         $titel = $verbinding->real_escape_string($data['titel']);
         $auteur = $verbinding->real_escape_string($data['auteur']);
         $uitgever = $verbinding->real_escape_string($data['uitgever']);
-        $jaar = intval($data['jaar']);
+        $publicatiedatum = intval($data['publicatiedatum']);
         $isbn = $verbinding->real_escape_string($data['isbn']);
         $genre = $verbinding->real_escape_string($data['genre']);
-        $kast = $verbinding->real_escape_string($data['kast_nummer']);
 
-        $sql = "INSERT INTO boeken (titel, auteur, uitgever, jaar, isbn, genre, kast_nummer)
-                VALUES ('$titel', '$auteur', '$uitgever', $jaar, '$isbn', '$genre', '$kast')";
+        $sql = "INSERT INTO boeken (titel, auteur, uitgever, publicatiedatum, isbn, genre)
+                VALUES ('$titel', '$auteur', '$uitgever', $publicatiedatum, '$isbn', '$genre')";
 
         if ($verbinding->query($sql)) {
             echo json_encode(['succes' => true]);
