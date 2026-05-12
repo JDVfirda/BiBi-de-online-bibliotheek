@@ -25,24 +25,52 @@ switch ($methode) {
         break;
 
     case 'POST':
-        $data = json_decode(file_get_contents('php://input'), true);
+    $data = json_decode(file_get_contents('php://input'), true);
 
-        $titel = $verbinding->real_escape_string($data['titel']);
-        $auteur = $verbinding->real_escape_string($data['auteur']);
-        $uitgever = $verbinding->real_escape_string($data['uitgever']);
-        $publicatiedatum = intval($data['publicatiedatum']);
-        $isbn = $verbinding->real_escape_string($data['isbn']);
-        $genre = $verbinding->real_escape_string($data['genre']);
+    $titel = $verbinding->real_escape_string($data['titel']);
+    $taal = $verbinding->real_escape_string($data['taal']);
+    $auteur = $verbinding->real_escape_string($data['auteur']);
+    $genre = $verbinding->real_escape_string($data['genre']);
+    $pagina_aantal = intval($data['pagina_aantal']);
+    $publicatiedatum = $verbinding->real_escape_string($data['publicatiedatum']);
+    $uitgever = $verbinding->real_escape_string($data['uitgever']);
+    $isbn = $verbinding->real_escape_string($data['isbn']);
 
-        $sql = "INSERT INTO boeken (titel, auteur, uitgever, publicatiedatum, isbn, genre)
-                VALUES ('$titel', '$auteur', '$uitgever', $publicatiedatum, '$isbn', '$genre')";
+    $sql = "
+        INSERT INTO boeken 
+        (
+            titel,
+            taal,
+            auteur,
+            genre,
+            pagina_aantal,
+            publicatiedatum,
+            uitgever,
+            isbn
+        )
+        VALUES
+        (
+            '$titel',
+            '$taal',
+            '$auteur',
+            '$genre',
+            $pagina_aantal,
+            '$publicatiedatum',
+            '$uitgever',
+            '$isbn'
+        )
+    ";
 
-        if ($verbinding->query($sql)) {
-            echo json_encode(['succes' => true]);
-        } else {
-            echo json_encode(['succes' => false, 'fout' => $verbinding->error]);
-        }
-        break;
+    if ($verbinding->query($sql)) {
+        echo json_encode(['succes' => true]);
+    } else {
+        echo json_encode([
+            'succes' => false,
+            'fout' => $verbinding->error
+        ]);
+    }
+
+    break;
 
     case 'DELETE':
         $data = json_decode(file_get_contents('php://input'), true);

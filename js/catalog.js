@@ -49,15 +49,23 @@ function displayBooks(list) {
                         </div>
 
                         <div class="book-card-uitgever text-muted mb-1">
-                            <small>${book.uitgever}</small>
+                            <small><strong>Uitgever:</strong> ${book.uitgever}</small>
                         </div>
 
-                        <div class="book-card-jaar text-muted mb-1">
-                            <small>${book.jaar}</small>
+                        <div class="book-card-publicatie text-muted mb-1">
+                            <small><strong>Publicatie:</strong> ${book.publicatiedatum}</small>
                         </div>
 
-                        <div class="book-card-genre text-muted mb-2">
-                            <small>${book.genre}</small>
+                        <div class="book-card-taal text-muted mb-1">
+                            <small><strong>Taal:</strong> ${book.taal}</small>
+                        </div>
+
+                        <div class="book-card-paginas text-muted mb-1">
+                            <small><strong>Pagina's:</strong> ${book.pagina_aantal}</small>
+                        </div>
+
+                        <div class="book-card-genre text-muted mb-3">
+                            <small><strong>Genre:</strong> ${book.genre}</small>
                         </div>
 
                         <button class="btn btn-outline-primary w-100 view-book-btn">
@@ -89,11 +97,25 @@ openBookModal(book);
 function openBookModal(book) {
 
     document.getElementById("modalTitle").innerText = book.titel;
-    document.getElementById("modalAuthor").innerText = book.auteur;
-    document.getElementById("modalPublisher").innerText = book.uitgever;
-    document.getElementById("modalYear").innerText = book.jaar;
-    document.getElementById("modalGenre").innerText = book.genre;
-    document.getElementById("modalISBN").innerText = book.isbn;
+
+    document.getElementById("modalAuthor").innerText =
+        `${book.auteur} (${book.taal})`;
+
+    document.getElementById("modalPublisher").innerText =
+        book.uitgever;
+
+    document.getElementById("modalYear").innerText =
+        book.publicatiedatum;
+
+    document.getElementById("modalGenre").innerText =
+        book.genre;
+
+    document.getElementById("modalISBN").innerText =
+        book.isbn;
+
+    // NEW
+    document.getElementById("modalPages").innerText =
+        book.pagina_aantal;
 
     const img = document.getElementById("modalImage");
 
@@ -125,7 +147,31 @@ function openBookModal(book) {
         }
     };
 
-    const modal = new bootstrap.Modal(document.getElementById('bookModal'));
+    // Borrow book button
+    document.getElementById("borrowBookBtn").onclick = () => {
+
+        fetch("backend/uitleningen.php", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action: "leen",
+                boek_id: book.id
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data.message);
+            alert(data.message);
+        });
+
+    };
+
+    const modal = new bootstrap.Modal(
+        document.getElementById('bookModal')
+    );
+
     modal.show();
 }
 
