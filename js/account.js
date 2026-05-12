@@ -3,11 +3,11 @@
 function laadAccountGegevens() {
     const gebruikersnaam = localStorage.getItem('gebruikersnaam');
 
-    // Als niet ingelogd, stuur terug naar homepagina
-//    if (!gebruikersnaam) {
-//        window.location.href = 'index.html';
-//        return;
-//    }
+    // Als gebruiker niet is ingelogd, stuur terug naar homepagina
+    if (!gebruikersnaam) {
+        window.location.href = 'index.html';
+        return;
+    }
 
     // Haal de klantgegevens op uit de backend
     fetch(`backend/klanten.php?gebruikersnaam=${gebruikersnaam}`)
