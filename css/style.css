@@ -2,19 +2,21 @@
    GLOBAL (used everywhere)
    ========================= */
 
-   /* body */
-   html, body {
-    height:auto;
-    margin: 0%
-  ;
+/* body */
+html, body {
+  height: 100%;
+  margin: 0;
 }
 
 body {
-    min-height: 100vh;
-    display: block;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
+
 /* Footer */
 .footer {
+  margin-top: auto;
   background-color: #0d6efd;
   color: white;
 }
@@ -46,13 +48,11 @@ body {
   text-decoration: underline;
 }
 
-
 /* =========================
    COMPONENTS (reusable)
    ========================= */
 
 /* Catalog */
-
 .catalog-container {
   padding: 0 15px;
 }
@@ -92,15 +92,57 @@ body {
   color: #6c757d;
   margin-bottom: 10px;
 }
-/* Accordion */
-.accordion-button {
-  background-color: #0d6efd;
-  color: white;
+
+/* =========================
+   ACCORDION
+   ========================= */
+
+.accordion {
+  --bs-accordion-border-width: 0;
+  --bs-accordion-bg: transparent;
 }
 
+/* Card */
+.accordion-item {
+  border: none;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Button base */
+.accordion-button {
+  background: #fff;
+  color: #212529;
+  font-weight: 600;
+  padding: 18px;
+  box-shadow: none !important;
+}
+
+/* Open state */
 .accordion-button:not(.collapsed) {
-  background-color: #09244d;
-  color: white;
+  background: #0d6efd;
+  color: #fff;
+}
+
+/* Focus */
+.accordion-button:focus {
+  box-shadow: none !important;
+}
+
+/* Body */
+.accordion-body {
+  background: #f8f9fa;
+  padding: 18px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Arrow */
+.accordion-button::after {
+  transition: transform 0.2s ease;
 }
 
 /* =========================
@@ -182,7 +224,6 @@ body {
 .home-page .container {
   animation: fadeInUp 1s ease;
 }
-
 
 /* =========================
    ANIMATIONS
