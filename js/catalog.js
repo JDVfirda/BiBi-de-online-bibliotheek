@@ -40,7 +40,7 @@ function renderBooks(books) {
                         <img src="${front}"
                              class="img-fluid mb-3 rounded"
                              style="height:250px;width:100%;object-fit:contain;"
-                             onerror="this.src='images/covers/default.jpg'">
+                             onerror="this.src='images/covers/default.png'">
 
                         <div class="fw-semibold">${book.titel}</div>
                         <div class="text-muted">${book.auteur}</div>
