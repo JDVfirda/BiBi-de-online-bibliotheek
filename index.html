@@ -56,6 +56,7 @@
 </section>
 
 <!-- Login Modal -->
+<!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -64,14 +65,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <div id="login-melding"></div>
+        <form onsubmit="login(event)">
           <div class="mb-3">
             <label class="form-label">Gebruikersnaam/E-mail</label>
-            <input type="text" class="form-control">
+            <input type="text" id="login-gebruikersnaam" class="form-control" required>
           </div>
           <div class="mb-3">
             <label class="form-label">Wachtwoord</label>
-            <input type="password" class="form-control">
+            <input type="password" id="login-wachtwoord" class="form-control" required>
           </div>
           <button type="submit" class="btn btn-primary w-100">Inloggen</button>
           <a href="register.html" class="register d-block text-center text-primary mt-3">Nog geen account? Klik hier!</a>
@@ -89,5 +91,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/script.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>
