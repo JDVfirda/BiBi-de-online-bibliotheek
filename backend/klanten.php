@@ -15,14 +15,20 @@ $methode = $_SERVER['REQUEST_METHOD'];
 switch ($methode) {
     
     case 'GET':
+        if (isset($_GET['gebruikersnaam'])) {
+            $gebruikersnaam = $verbinding->real_escape_string($_GET['gebruikersnaam']);
+            $resultaat = $verbinding->query("SELECT * FROM klanten WHERE gebruikersnaam = '$gebruikersnaam'");
+            $klant = $resultaat->fetch_assoc();
+            echo json_encode($klant);
+        } else {
         $resultaat = $verbinding->query('SELECT * FROM klanten');
         $klanten = [];
 
         while ($rij = $resultaat->fetch_assoc()) {
             $klanten[] = $rij;
+            }
+            echo json_encode($klanten);
         }
-
-        echo json_encode($klanten);
         break;
 
 
