@@ -13,64 +13,46 @@ $methode = $_SERVER['REQUEST_METHOD'];
 
 switch ($methode) {
 
-    case 'GET':
-        $resultaat = $verbinding->query('SELECT * FROM boeken');
-        $boeken = [];
+   case 'GET':
 
-        while ($rij = $resultaat->fetch_assoc()) {
-            $boeken[] = $rij;
-        }
+$sql = "
+SELECT 
+    b.*,
 
-        echo json_encode($boeken);
-        break;
+    COUNT(v.serienummer_id) AS totaal_kopieen,
 
-    case 'POST':
-    $data = json_decode(file_get_contents('php://input'), true);
+    COALESCE(SUM(CASE WHEN v.status = 'beschikbaar' THEN 1 ELSE 0 END), 0) AS beschikbare_kopieen,
 
-    $titel = $verbinding->real_escape_string($data['titel']);
-    $taal = $verbinding->real_escape_string($data['taal']);
-    $auteur = $verbinding->real_escape_string($data['auteur']);
-    $genre = $verbinding->real_escape_string($data['genre']);
-    $pagina_aantal = intval($data['pagina_aantal']);
-    $publicatiedatum = $verbinding->real_escape_string($data['publicatiedatum']);
-    $uitgever = $verbinding->real_escape_string($data['uitgever']);
-    $isbn = $verbinding->real_escape_string($data['isbn']);
+    CASE 
+        WHEN COUNT(v.serienummer_id) > 0 
+        AND SUM(CASE WHEN v.status = 'beschikbaar' THEN 1 ELSE 0 END) > 0
+        THEN 1 
+        ELSE 0 
+    END AS has_back
 
-    $sql = "
-        INSERT INTO boeken 
-        (
-            titel,
-            taal,
-            auteur,
-            genre,
-            pagina_aantal,
-            publicatiedatum,
-            uitgever,
-            isbn
-        )
-        VALUES
-        (
-            '$titel',
-            '$taal',
-            '$auteur',
-            '$genre',
-            $pagina_aantal,
-            '$publicatiedatum',
-            '$uitgever',
-            '$isbn'
-        )
-    ";
+FROM boeken b
+LEFT JOIN voorraad v ON v.boek_id = b.id
+GROUP BY b.id
+";
 
-    if ($verbinding->query($sql)) {
-        echo json_encode(['succes' => true]);
-    } else {
-        echo json_encode([
-            'succes' => false,
-            'fout' => $verbinding->error
-        ]);
-    }
+$result = $verbinding->query($sql);
 
-    break;
+if (!$result) {
+    echo json_encode([
+        "error" => "SQL error",
+        "message" => $verbinding->error
+    ]);
+    exit;
+}
+
+$boeken = [];
+
+while ($row = $result->fetch_assoc()) {
+    $boeken[] = $row;
+}
+
+echo json_encode($boeken);
+break;
 
     case 'DELETE':
         $data = json_decode(file_get_contents('php://input'), true);

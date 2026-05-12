@@ -1,205 +1,162 @@
 const catalog = document.getElementById('catalog');
 
+let modalState = {
+    zoomed: false
+};
 
-// Load books from backend
+// -------------------------
+// LOAD BOOKS
+// -------------------------
 function loadBooks() {
     fetch('backend/boeken.php')
-        .then(response => response.json())
-        .then(books => {
-            displayBooks(books);
+        .then(r => r.json())
+        .then(data => {
+            if (!Array.isArray(data)) return console.error("Bad data:", data);
+            renderBooks(data);
         })
-        .catch(error => console.error('Fout bij laden boeken:', error));
+        .catch(err => console.error(err));
 }
 
-
-// Render books
-function displayBooks(list) {
-
-    if (!catalog) return;
-
+// -------------------------
+// RENDER
+// -------------------------
+function renderBooks(books) {
     catalog.innerHTML = '';
 
-    list.forEach(book => {
+    books.forEach(book => {
 
-        const frontCover = `images/covers/${book.isbn}_front.jpg`;
-        const backCover = `images/covers/${book.isbn}_back.jpg`;
+        const front = `images/covers/${book.isbn}_front.jpg`;
+        const back = `images/covers/${book.isbn}_back.jpg`;
 
-        catalog.innerHTML += `
+        catalog.insertAdjacentHTML('beforeend', `
             <div class="col-12 col-md-6 mb-4">
-                <div class="card book-card" 
-                     data-book='${JSON.stringify(book)}'
-                     data-front="${frontCover}"
-                     data-back="${backCover}">
+                <div class="card book-card"
+                    data-book='${JSON.stringify(book).replace(/'/g, "&apos;")}'
+                    data-front="${front}"
+                    data-back="${back}">
 
                     <div class="book-card-body p-3">
 
-                        <img 
-                            src="${frontCover}" 
-                            class="img-fluid mb-3 rounded"
-                            style="height:250px; width:100%; object-fit:contain;"
-                            onerror="this.src='images/covers/default.jpg'"
-                        >
+                        <img src="${front}"
+                             class="img-fluid mb-3 rounded"
+                             style="height:250px;width:100%;object-fit:contain;"
+                             onerror="this.src='images/covers/default.jpg'">
 
-                        <div class="book-card-title fw-semibold mb-1">
-                            ${book.titel}
-                        </div>
+                        <div class="fw-semibold">${book.titel}</div>
+                        <div class="text-muted">${book.auteur}</div>
 
-                        <div class="book-card-author text-muted mb-2">
-                            ${book.auteur}
-                        </div>
-
-                        <div class="book-card-uitgever text-muted mb-1">
-                            <small><strong>Uitgever:</strong> ${book.uitgever}</small>
-                        </div>
-
-                        <div class="book-card-publicatie text-muted mb-1">
-                            <small><strong>Publicatie:</strong> ${book.publicatiedatum}</small>
-                        </div>
-
-                        <div class="book-card-taal text-muted mb-1">
-                            <small><strong>Taal:</strong> ${book.taal}</small>
-                        </div>
-
-                        <div class="book-card-paginas text-muted mb-1">
-                            <small><strong>Pagina's:</strong> ${book.pagina_aantal}</small>
-                        </div>
-
-                        <div class="book-card-genre text-muted mb-3">
-                            <small><strong>Genre:</strong> ${book.genre}</small>
-                        </div>
-
-                        <button class="btn btn-outline-primary w-100 view-book-btn">
+                        <button class="btn btn-outline-primary w-100 view-book-btn mt-3">
                             Bekijk boek
                         </button>
 
                     </div>
                 </div>
             </div>
-        `;
+        `);
     });
 }
 
-// Event delegation for modal buttons
-document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("view-book-btn")) {
-        const card = e.target.closest(".book-card");
-        const book = JSON.parse(card.dataset.book);
+// -------------------------
+// CLICK HANDLER (single source)
+// -------------------------
+document.addEventListener('click', (e) => {
 
-book.cover_front = card.dataset.front;
-book.cover_back = card.dataset.back;
+    const btn = e.target.closest('.view-book-btn');
+    if (!btn) return;
 
-openBookModal(book);
-    }
+    const card = btn.closest('.book-card');
+    const book = JSON.parse(card.dataset.book);
+
+    book.cover_front = card.dataset.front;
+    book.cover_back = card.dataset.back;
+
+    openModal(book);
 });
 
+// -------------------------
+// MODAL LOGIC (clean reset)
+// -------------------------
+function openModal(book) {
 
-// Open Bootstrap modal
-function openBookModal(book) {
-
-    document.getElementById("modalTitle").innerText = book.titel;
-
-    document.getElementById("modalAuthor").innerText =
-        `${book.auteur} (${book.taal})`;
-
-    document.getElementById("modalPublisher").innerText =
-        book.uitgever;
-
-    document.getElementById("modalYear").innerText =
-        book.publicatiedatum;
-
-    document.getElementById("modalGenre").innerText =
-        book.genre;
-
-    document.getElementById("modalISBN").innerText =
-        book.isbn;
-
-    // NEW
-    document.getElementById("modalPages").innerText =
-        book.pagina_aantal;
+    const title = document.getElementById("modalTitle");
+    const author = document.getElementById("modalAuthor");
+    const publisher = document.getElementById("modalPublisher");
+    const year = document.getElementById("modalYear");
+    const genre = document.getElementById("modalGenre");
+    const isbn = document.getElementById("modalISBN");
+    const pages = document.getElementById("modalPages");
 
     const img = document.getElementById("modalImage");
+    const backBtn = document.getElementById("showBack");
+    const frontBtn = document.getElementById("showFront");
 
-    // Default image = front
-    img.src = book.cover_front;
+    // reset state EVERY TIME
+    modalState.zoomed = false;
 
-    // Front button
-    document.getElementById("showFront").onclick = () => {
-        img.src = book.cover_front;
+    function setImage(src) {
+        modalState.zoomed = false;
+        img.style.transform = "scale(1)";
+        img.style.cursor = "zoom-in";
+        img.src = src;
+    }
+
+    // fill modal
+    title.textContent = book.titel;
+    author.textContent = `${book.auteur} (${book.taal})`;
+    publisher.textContent = book.uitgever;
+    year.textContent = book.publicatiedatum;
+    genre.textContent = book.genre;
+    isbn.textContent = book.isbn;
+    pages.textContent = book.pagina_aantal;
+
+    // default image
+    setImage(book.cover_front);
+
+    // Display frontside button
+    frontBtn.onclick = () => setImage(book.cover_front);
+
+    //Display backside button if image exists, else hide
+    backBtn.style.display = "none";
+    backBtn.onclick = null;
+
+    const test = new Image();
+    test.src = book.cover_back;
+
+    test.onload = () => {
+        backBtn.style.display = "inline-block";
+        backBtn.onclick = () => setImage(book.cover_back);
     };
 
-    // Back button
-    document.getElementById("showBack").onclick = () => {
-        img.src = book.cover_back;
+    test.onerror = () => {
+        backBtn.style.display = "none";
     };
 
-    // Zoom functionality
-    let zoomed = false;
-
+    // zoom
     img.onclick = () => {
-        zoomed = !zoomed;
-
-        if (zoomed) {
-            img.style.transform = "scale(2)";
-            img.style.cursor = "zoom-out";
-        } else {
-            img.style.transform = "scale(1)";
-            img.style.cursor = "zoom-in";
-        }
+        modalState.zoomed = !modalState.zoomed;
+        img.style.transform = modalState.zoomed ? "scale(2)" : "scale(1)";
+        img.style.cursor = modalState.zoomed ? "zoom-out" : "zoom-in";
     };
 
-    // Borrow book button
-    document.getElementById("borrowBookBtn").onclick = () => {
-
-        fetch("backend/uitleningen.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                action: "leen",
-                boek_id: book.id
-            })
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data.message);
-            alert(data.message);
-        });
-
-    };
-
-    const modal = new bootstrap.Modal(
-        document.getElementById('bookModal')
-    );
-
-    modal.show();
+    new bootstrap.Modal(document.getElementById('bookModal')).show();
 }
 
+// -------------------------
+// SEARCH
+// -------------------------
+document.getElementById("search")?.addEventListener("input", function () {
 
+    const value = this.value.toLowerCase();
 
-// Search filter
-const searchInput = document.getElementById("search");
-
-if (searchInput) {
-    searchInput.addEventListener("input", function () {
-        const value = this.value.toLowerCase();
-        const cards = document.querySelectorAll('.book-card');
-
-        cards.forEach(card => {
-            const text = card.textContent.toLowerCase();
-            const wrapper = card.closest('.col-12');
-
-            if (wrapper) {
-                wrapper.style.display = text.includes(value) ? '' : 'none';
-            }
-        });
+    document.querySelectorAll('.book-card').forEach(card => {
+        const match = card.textContent.toLowerCase().includes(value);
+        card.closest('.col-12').style.display = match ? '' : 'none';
     });
-}
+});
 
+// -------------------------
+// INIT
+// -------------------------
+if (catalog) loadBooks();
 
-// Start loading books
-if (catalog) {
-    loadBooks();
-}
-
-console.log("catalog.js loaded");
+console.log("catalog.js loaded clean version");
