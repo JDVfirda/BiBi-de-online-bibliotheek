@@ -1,5 +1,7 @@
 const catalog = document.getElementById('catalog');
 
+let currentBook = null;
+
 let modalState = {
     zoomed: false
 };
@@ -25,6 +27,11 @@ function renderBooks(books) {
 
     books.forEach(book => {
 
+        const statusBadge =
+            book.beschikbare_kopieen > 0
+                ? `<span class="badge bg-success mb-2">Beschikbaar</span>`
+                : `<span class="badge bg-danger mb-2">Uitgeleend</span>`;
+
         const front = `images/covers/${book.isbn}_front.jpg`;
         const back = `images/covers/${book.isbn}_back.jpg`;
 
@@ -36,6 +43,7 @@ function renderBooks(books) {
                     data-back="${back}">
 
                     <div class="book-card-body p-3">
+                        ${statusBadge}
 
                         <img src="${front}"
                              class="img-fluid mb-3 rounded"
@@ -45,8 +53,14 @@ function renderBooks(books) {
                         <div class="fw-semibold">${book.titel}</div>
                         <div class="text-muted">${book.auteur}</div>
 
-                        <button class="btn btn-outline-primary w-100 view-book-btn mt-3">
-                            Bekijk boek
+                        <button class="btn w-100 view-book-btn mt-3 ${
+                            book.beschikbare_kopieen > 0
+                                ? "btn-outline-primary"
+                                : "btn-warning"
+                        }">
+                            ${book.beschikbare_kopieen > 0
+                                ? "Bekijk & leen boek"
+                                : "Reserveren"}
                         </button>
 
                     </div>
@@ -57,7 +71,7 @@ function renderBooks(books) {
 }
 
 // -------------------------
-// CLICK HANDLER (single source)
+// CLICK HANDLER
 // -------------------------
 document.addEventListener('click', (e) => {
 
@@ -70,13 +84,17 @@ document.addEventListener('click', (e) => {
     book.cover_front = card.dataset.front;
     book.cover_back = card.dataset.back;
 
+    currentBook = book;
+
     openModal(book);
 });
 
 // -------------------------
-// MODAL LOGIC (clean reset)
+// MODAL LOGIC
 // -------------------------
 function openModal(book) {
+
+    currentBook = book;
 
     const title = document.getElementById("modalTitle");
     const author = document.getElementById("modalAuthor");
@@ -90,7 +108,6 @@ function openModal(book) {
     const backBtn = document.getElementById("showBack");
     const frontBtn = document.getElementById("showFront");
 
-    // reset state EVERY TIME
     modalState.zoomed = false;
 
     function setImage(src) {
@@ -109,13 +126,10 @@ function openModal(book) {
     isbn.textContent = book.isbn;
     pages.textContent = book.pagina_aantal;
 
-    // default image
     setImage(book.cover_front);
 
-    // Display frontside button
     frontBtn.onclick = () => setImage(book.cover_front);
 
-    //Display backside button if image exists, else hide
     backBtn.style.display = "none";
     backBtn.onclick = null;
 
@@ -131,11 +145,85 @@ function openModal(book) {
         backBtn.style.display = "none";
     };
 
-    // zoom
     img.onclick = () => {
         modalState.zoomed = !modalState.zoomed;
         img.style.transform = modalState.zoomed ? "scale(2)" : "scale(1)";
         img.style.cursor = modalState.zoomed ? "zoom-out" : "zoom-in";
+    };
+
+    // -------------------------
+    // BORROW / RESERVE BUTTON
+    // -------------------------
+    const borrowBtn = document.getElementById("borrowBookBtn");
+
+    if (book.beschikbare_kopieen > 0) {
+        borrowBtn.textContent = "Leen boek";
+        borrowBtn.classList.remove("btn-warning");
+        borrowBtn.classList.add("btn-primary");
+    } else {
+        borrowBtn.textContent = "Reserveren";
+        borrowBtn.classList.remove("btn-primary");
+        borrowBtn.classList.add("btn-warning");
+    }
+
+    borrowBtn.onclick = () => {
+
+        const klant_id = localStorage.getItem("klant_id");
+
+        if (!klant_id) {
+            alert("Je moet eerst inloggen.");
+            return;
+        }
+
+        borrowBtn.disabled = true;
+        borrowBtn.textContent = "Bezig...";
+
+        const endpoint = book.beschikbare_kopieen > 0
+            ? "backend/uitleningen.php"
+            : "backend/reserveringen.php";
+
+        fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                boek_id: book.id,
+                klant_id: klant_id
+            })
+        })
+        .then(r => r.json())
+        .then(data => {
+
+            if (data.succes) {
+                alert(
+                    book.beschikbare_kopieen > 0
+                        ? "Boek geleend!"
+                        : "Reservering geplaatst!"
+                );
+
+                bootstrap.Modal.getInstance(
+                    document.getElementById('bookModal')
+                ).hide();
+
+            } else {
+                alert(data.fout || "Actie mislukt");
+            }
+
+            borrowBtn.disabled = false;
+            borrowBtn.textContent =
+                book.beschikbare_kopieen > 0
+                    ? "Leen boek"
+                    : "Reserveren";
+        })
+        .catch(err => {
+            console.error(err);
+            alert("Server fout");
+
+            borrowBtn.disabled = false;
+            borrowBtn.textContent =
+                book.beschikbare_kopieen > 0
+                    ? "Leen boek"
+                    : "Reserveren";
+        });
     };
 
     new bootstrap.Modal(document.getElementById('bookModal')).show();

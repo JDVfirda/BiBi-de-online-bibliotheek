@@ -22,6 +22,7 @@ function login(event) {
             localStorage.setItem('ingelogd', true);
             localStorage.setItem('voornaam', data.klant.voornaam);
             localStorage.setItem('gebruikersnaam', data.klant.gebruikersnaam);
+            localStorage.setItem('klant_id', data.klant.id);
 
             bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
 
