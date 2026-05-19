@@ -1,6 +1,7 @@
 <?php
 // Een programma waarmee een gebruiker kan inloggen met gebruikersnaam of email en wachtwoord
 
+session_start();
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
@@ -22,14 +23,17 @@ if ($resultaat->num_rows === 0) {
     $klant = $resultaat->fetch_assoc();
 
     if (password_verify($wachtwoord, $klant['wachtwoord'])) {
+        $_SESSION['role'] = $klant['is_admin'] == 1 ? 'admin' : 'gebruiker';
+        $_SESSION['klant_id'] = $klant['id'];
+        $_SESSION['gebruikersnaam'] = $klant['gebruikersnaam'];
+
         echo json_encode([
             'succes' => true,
             'klant' => [
                 'id' => $klant['id'],
                 'voornaam' => $klant['voornaam'],
-                'achternaam' => $klant['achternaam'],
                 'gebruikersnaam' => $klant['gebruikersnaam'],
-                'email' => $klant['email']
+                'is_admin' => $klant['is_admin']
             ]
         ]);
     } else {

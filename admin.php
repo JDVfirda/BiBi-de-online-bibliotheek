@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['role'])) {
+    die("Je moet eerst inloggen");
+}
+
+if ($_SESSION['role'] !== 'admin') {
+    die("Geen toegang");
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -48,9 +61,11 @@
                         <th>Titel</th>
                         <th>Auteur</th>
                         <th>Uitgever</th>
+                        <th>Taal</th>
                         <th>Genre</th>
-                        <th>Jaar</th>
-                        <th>Beschikbaar</th>
+                        <th>Pagina's</th>
+                        <th>Publicatiedatum</th>
+                        <th>ISBN</th>
                         <th>Acties</th>
                     </tr>
                 </thead>
