@@ -80,11 +80,11 @@
 
 <!-- view book Modal -->
 <div class="modal fade" id="bookModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+   <div class="modal-content border-0 shadow-lg rounded-4">
 
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalTitle"></h5>
+     <div class="modal-header border-0 pb-0">
+       <h3 class="modal-title fw-bold" id="modalTitle"></h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
 
@@ -113,33 +113,53 @@
   </div>
 
  <!-- Book info -->
-<p><strong>Auteur:</strong> <span id="modalAuthor"></span></p>
+ <!-- Book info -->
+<div class="text-start mt-4 px-2">
 
-<p><strong>Uitgever:</strong> <span id="modalPublisher"></span></p>
+  <div class="row mb-2">
+    <div class="col-5 fw-semibold">Auteur</div>
+    <div class="col-7" id="modalAuthor"></div>
+  </div>
 
-<p><strong>Publicatiedatum:</strong> 
-  <span id="modalYear"></span>
-</p>
+  <div class="row mb-2">
+    <div class="col-5 fw-semibold">Uitgever</div>
+    <div class="col-7" id="modalPublisher"></div>
+  </div>
 
-<p><strong>Pagina's:</strong> 
-  <span id="modalPages"></span>
-</p>
+  <div class="row mb-2">
+    <div class="col-5 fw-semibold">Publicatiedatum</div>
+    <div class="col-7" id="modalYear"></div>
+  </div>
 
-<p><strong>Genre:</strong> 
-  <span id="modalGenre"></span>
-</p>
+  <div class="row mb-2">
+    <div class="col-5 fw-semibold">Pagina's</div>
+    <div class="col-7" id="modalPages"></div>
+  </div>
 
-<p><strong>ISBN:</strong> 
-  <span id="modalISBN"></span>
-</p>
+  <div class="row mb-2">
+    <div class="col-5 fw-semibold">Genre</div>
+    <div class="col-7" id="modalGenre"></div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col-5 fw-semibold">ISBN</div>
+    <div class="col-7" id="modalISBN"></div>
+  </div>
 
 </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ga terug</button>
-        <button class="btn btn-primary" id="borrowBookBtn">Leen boek
-          
-        </button>
+
+      <div class="modal-footer border-0 pt-0">
+        <button type="button"
+        class="btn btn-outline-secondary px-4"
+        data-bs-dismiss="modal">
+  Sluiten
+</button>
+
+<button class="btn btn-primary px-4"
+        id="borrowBookBtn">
+  Leen boek
+</button>
       </div>
     
     </div>

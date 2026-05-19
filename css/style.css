@@ -94,6 +94,85 @@ body {
 }
 
 /* =========================
+   MODAL
+   ========================= */
+
+.modal-content {
+  border-radius: 24px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+/* Header */
+.modal-header {
+  padding: 24px 24px 0 24px;
+}
+
+.modal-title {
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+/* Body */
+.modal-body {
+  padding: 24px;
+}
+
+/* Book image */
+#modalImage {
+  max-height: 500px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 16px;
+  transition: transform 0.3s ease;
+  cursor: zoom-in;
+
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Front/back buttons */
+#showFront,
+#showBack {
+  border-radius: 999px;
+  padding: 6px 16px;
+}
+
+/* Book info rows */
+.modal-body .row {
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.modal-body .row:last-child {
+  border-bottom: none;
+}
+
+/* Footer */
+.modal-footer {
+  padding: 0 24px 24px 24px;
+}
+
+/* Footer buttons */
+.modal-footer .btn {
+  border-radius: 12px;
+  padding: 10px 22px;
+  font-weight: 600;
+}
+
+/* Modal animation */
+.modal.fade .modal-dialog {
+  transition: transform 0.25s ease-out;
+}
+
+.modal.fade .modal-dialog {
+  transform: scale(0.95);
+}
+
+.modal.show .modal-dialog {
+  transform: scale(1);
+}
+
+/* =========================
    ACCORDION
    ========================= */
 

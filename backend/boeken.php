@@ -8,12 +8,13 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 
 require_once 'config/database.php';
+$klant_id = intval($_GET['klant_id'] ?? 0);
 
 $methode = $_SERVER['REQUEST_METHOD'];
 
 switch ($methode) {
 
-   case 'GET':
+  case 'GET':
 
 $sql = "
 SELECT 
@@ -21,17 +22,35 @@ SELECT
 
     COUNT(v.serienummer_id) AS totaal_kopieen,
 
-    COALESCE(SUM(CASE WHEN v.status = 'beschikbaar' THEN 1 ELSE 0 END), 0) AS beschikbare_kopieen,
-
     CASE 
-        WHEN COUNT(v.serienummer_id) > 0 
-        AND SUM(CASE WHEN v.status = 'beschikbaar' THEN 1 ELSE 0 END) > 0
-        THEN 1 
-        ELSE 0 
-    END AS has_back
+        WHEN COUNT(v.serienummer_id) > 0
+        THEN 1
+        ELSE 0
+    END AS has_back,
+
+    EXISTS (
+        SELECT 1
+        FROM uitleningen u
+        JOIN voorraad vv 
+            ON vv.serienummer_id = u.serienummer_id
+        WHERE vv.boek_id = b.id
+        AND u.klant_id = $klant_id
+        AND u.datum_terug IS NULL
+    ) AS geleend_door_gebruiker,
+
+    EXISTS (
+        SELECT 1
+        FROM reserveringen r
+        WHERE r.boek_id = b.id
+        AND r.klant_id = $klant_id
+        AND r.status = 'actief'
+    ) AS gereserveerd_door_gebruiker
 
 FROM boeken b
-LEFT JOIN voorraad v ON v.boek_id = b.id
+
+LEFT JOIN voorraad v 
+    ON v.boek_id = b.id
+
 GROUP BY b.id
 ";
 
@@ -52,6 +71,7 @@ while ($row = $result->fetch_assoc()) {
 }
 
 echo json_encode($boeken);
+
 break;
 
     case 'DELETE':

@@ -10,13 +10,35 @@ let modalState = {
 // LOAD BOOKS
 // -------------------------
 function loadBooks() {
-    fetch('backend/boeken.php')
-        .then(r => r.json())
-        .then(data => {
-            if (!Array.isArray(data)) return console.error("Bad data:", data);
-            renderBooks(data);
-        })
-        .catch(err => console.error(err));
+    Promise.all([
+        fetch(`backend/boeken.php?klant_id=${localStorage.getItem("klant_id") || 0}`)
+    .then(r => r.json()),
+        fetch('backend/boeken_status.php').then(r => r.json())
+    ])
+    .then(([books, status]) => {
+
+        if (!Array.isArray(books)) {
+            console.error("Books error:", books);
+            return;
+        }
+
+        const statusMap = {};
+
+        status.forEach(s => {
+            statusMap[s.id] = s;
+        });
+
+        books.forEach(book => {
+            const s = statusMap[book.id];
+
+            book.totaal = s?.totaal ?? 0;
+            book.uitgeleend = s?.uitgeleend ?? 0;
+            book.beschikbaar = s?.beschikbaar ?? 0;
+        });
+
+        renderBooks(books);
+    })
+    .catch(err => console.error(err));
 }
 
 // -------------------------
@@ -28,7 +50,7 @@ function renderBooks(books) {
     books.forEach(book => {
 
         const statusBadge =
-            book.beschikbare_kopieen > 0
+            book.beschikbaar > 0
                 ? `<span class="badge bg-success mb-2">Beschikbaar</span>`
                 : `<span class="badge bg-danger mb-2">Uitgeleend</span>`;
 
@@ -53,15 +75,25 @@ function renderBooks(books) {
                         <div class="fw-semibold">${book.titel}</div>
                         <div class="text-muted">${book.auteur}</div>
 
-                        <button class="btn w-100 view-book-btn mt-3 ${
-                            book.beschikbare_kopieen > 0
-                                ? "btn-outline-primary"
-                                : "btn-warning"
-                        }">
-                            ${book.beschikbare_kopieen > 0
-                                ? "Bekijk & leen boek"
-                                : "Reserveren"}
-                        </button>
+                       <button class="btn w-100 view-book-btn mt-3 ${
+    book.geleend_door_gebruiker == 1
+        ? "btn-success"
+        : book.gereserveerd_door_gebruiker == 1
+        ? "btn-secondary"
+        : book.beschikbaar > 0
+        ? "btn-outline-primary"
+        : "btn-warning"
+}">
+    ${
+        book.geleend_door_gebruiker == 1
+            ? "Al geleend"
+            : book.gereserveerd_door_gebruiker == 1
+            ? "Al gereserveerd"
+            : book.beschikbaar > 0
+            ? "Bekijk & leen boek"
+            : "Reserveren"
+    }
+</button>
 
                     </div>
                 </div>
@@ -94,7 +126,23 @@ document.addEventListener('click', (e) => {
 // -------------------------
 function openModal(book) {
 
-    currentBook = book;
+  let state = "available";
+
+if (book.geleend_door_gebruiker == 1) {
+
+    state = "already_borrowed";
+
+}
+else if (book.gereserveerd_door_gebruiker == 1) {
+
+    state = "already_reserved";
+
+}
+else if (book.beschikbaar <= 0) {
+
+    state = "reserve";
+
+}
 
     const title = document.getElementById("modalTitle");
     const author = document.getElementById("modalAuthor");
@@ -108,6 +156,8 @@ function openModal(book) {
     const backBtn = document.getElementById("showBack");
     const frontBtn = document.getElementById("showFront");
 
+    const borrowBtn = document.getElementById("borrowBookBtn");
+
     modalState.zoomed = false;
 
     function setImage(src) {
@@ -117,7 +167,7 @@ function openModal(book) {
         img.src = src;
     }
 
-    // fill modal
+    // Fill modal
     title.textContent = book.titel;
     author.textContent = `${book.auteur} (${book.taal})`;
     publisher.textContent = book.uitgever;
@@ -152,20 +202,36 @@ function openModal(book) {
     };
 
     // -------------------------
-    // BORROW / RESERVE BUTTON
+    // BUTTON STATE
     // -------------------------
-    const borrowBtn = document.getElementById("borrowBookBtn");
+ if (state === "available") {
 
-    if (book.beschikbare_kopieen > 0) {
-        borrowBtn.textContent = "Leen boek";
-        borrowBtn.classList.remove("btn-warning");
-        borrowBtn.classList.add("btn-primary");
-    } else {
-        borrowBtn.textContent = "Reserveren";
-        borrowBtn.classList.remove("btn-primary");
-        borrowBtn.classList.add("btn-warning");
-    }
+    borrowBtn.textContent = "Leen boek";
+    borrowBtn.className = "btn btn-primary w-100";
 
+}
+else if (state === "already_borrowed") {
+
+    borrowBtn.textContent = "Al geleend";
+    borrowBtn.className = "btn btn-success w-100";
+
+}
+else if (state === "already_reserved") {
+
+    borrowBtn.textContent = "Al gereserveerd";
+    borrowBtn.className = "btn btn-secondary w-100";
+
+}
+else if (state === "reserve") {
+
+    borrowBtn.textContent = "Reserveren";
+    borrowBtn.className = "btn btn-warning w-100";
+
+}
+
+    // -------------------------
+    // ACTION BUTTON
+    // -------------------------
     borrowBtn.onclick = () => {
 
         const klant_id = localStorage.getItem("klant_id");
@@ -175,30 +241,43 @@ function openModal(book) {
             return;
         }
 
-        borrowBtn.disabled = true;
+        let endpoint = "";
+        let body = {};
+
+       if (state === "already_borrowed" || state === "already_reserved") {
+
+    window.location.href = "mybooks.html";
+    return;
+
+     borrowBtn.disabled = true;
         borrowBtn.textContent = "Bezig...";
 
-        const endpoint = book.beschikbare_kopieen > 0
-            ? "backend/uitleningen.php"
-            : "backend/reserveringen.php";
+}
+
+if (state === "available") {
+            endpoint = "backend/uitleningen.php";
+            body = { boek_id: book.id, klant_id };
+
+        } else {
+            endpoint = "backend/reserveringen.php";
+            body = { boek_id: book.id, klant_id };
+        }
 
         fetch(endpoint, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                boek_id: book.id,
-                klant_id: klant_id
-            })
+            body: JSON.stringify(body)
         })
         .then(r => r.json())
         .then(data => {
 
             if (data.succes) {
-                alert(
-                    book.beschikbare_kopieen > 0
-                        ? "Boek geleend!"
-                        : "Reservering geplaatst!"
-                );
+
+                if (state === "available") {
+    alert("Boek geleend!");
+} else {
+    alert("Reservering geplaatst!");
+}
 
                 bootstrap.Modal.getInstance(
                     document.getElementById('bookModal')
@@ -209,20 +288,25 @@ function openModal(book) {
             }
 
             borrowBtn.disabled = false;
-            borrowBtn.textContent =
-                book.beschikbare_kopieen > 0
-                    ? "Leen boek"
-                    : "Reserveren";
+
+            // reset text
+          if (state === "available") {
+    borrowBtn.textContent = "Leen boek";
+} else if (state === "reserve") {
+    borrowBtn.textContent = "Reserveren";
+}
         })
         .catch(err => {
             console.error(err);
             alert("Server fout");
 
             borrowBtn.disabled = false;
-            borrowBtn.textContent =
-                book.beschikbare_kopieen > 0
-                    ? "Leen boek"
-                    : "Reserveren";
+
+           if (state === "available") {
+    borrowBtn.textContent = "Leen boek";
+} else if (state === "reserve") {
+    borrowBtn.textContent = "Reserveren";
+}
         });
     };
 
@@ -246,5 +330,3 @@ document.getElementById("search")?.addEventListener("input", function () {
 // INIT
 // -------------------------
 if (catalog) loadBooks();
-
-console.log("catalog.js loaded clean version");
