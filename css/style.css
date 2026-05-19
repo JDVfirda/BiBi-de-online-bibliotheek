@@ -1,27 +1,37 @@
 /* =========================
-   GLOBAL (used everywhere)
+   GLOBAL
    ========================= */
 
-/* body */
-html, body {
-  height: 100%;
+html,
+body {
   margin: 0;
+  min-height: 100vh;
 }
 
 body {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #f8f9fa;
 }
 
-/* Footer */
+/* =========================
+   LAYOUT
+   ========================= */
+
+main {
+  flex: 1;
+}
+
 .footer {
   margin-top: auto;
   background-color: #0d6efd;
   color: white;
 }
 
-/* Navigation */
+/* =========================
+   NAVIGATION
+   ========================= */
+
 .nav-link {
   transition: 0.3s ease;
   border-bottom: 2px solid transparent;
@@ -37,7 +47,10 @@ body {
   border-bottom: 2px solid white;
 }
 
-/* Links */
+/* =========================
+   LINKS
+   ========================= */
+
 .log-in,
 .register {
   text-decoration: none;
@@ -49,32 +62,52 @@ body {
 }
 
 /* =========================
-   COMPONENTS (reusable)
+   BUTTONS
    ========================= */
 
-/* Catalog */
+.btn {
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+/* =========================
+   CATALOG
+   ========================= */
+
 .catalog-container {
   padding: 0 15px;
 }
 
-/* Book card's */
+/* =========================
+   BOOK CARDS
+   ========================= */
+
 .book-card {
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
   cursor: pointer;
-  background-color: #f8f9fa;
+  background-color: #fff;
+  border: none;
 }
 
 .book-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 .book-card img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 260px;
+  object-fit: contain;
+  background: #fff;
+  padding: 10px;
 }
 
 .book-card-body {
@@ -94,31 +127,41 @@ body {
 }
 
 /* =========================
-   MODAL
+   BOOK MODAL
    ========================= */
 
-.modal-content {
+#bookModal .modal-content {
   border-radius: 24px;
   overflow: hidden;
-  backdrop-filter: blur(10px);
+  border: none;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
 }
 
-/* Header */
-.modal-header {
+#bookModal .modal-header {
   padding: 24px 24px 0 24px;
+  border-bottom: none;
 }
 
-.modal-title {
+#bookModal .modal-title {
   font-weight: 700;
-  font-size: 1.8rem;
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
 }
 
-/* Body */
-.modal-body {
+#bookModal .modal-body {
   padding: 24px;
 }
 
-/* Book image */
+#bookModal .modal-footer {
+  padding: 0 24px 24px 24px;
+  border-top: none;
+}
+
+#bookModal .modal-footer .btn {
+  border-radius: 12px;
+  padding: 10px 22px;
+  font-weight: 600;
+}
+
 #modalImage {
   max-height: 500px;
   width: auto;
@@ -130,42 +173,26 @@ body {
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* Front/back buttons */
 #showFront,
 #showBack {
   border-radius: 999px;
   padding: 6px 16px;
 }
 
-/* Book info rows */
-.modal-body .row {
+#bookModal .modal-body .row {
   padding: 8px 0;
   border-bottom: 1px solid #f1f1f1;
 }
 
-.modal-body .row:last-child {
+#bookModal .modal-body .row:last-child {
   border-bottom: none;
 }
 
-/* Footer */
-.modal-footer {
-  padding: 0 24px 24px 24px;
-}
-
-/* Footer buttons */
-.modal-footer .btn {
-  border-radius: 12px;
-  padding: 10px 22px;
-  font-weight: 600;
-}
-
 /* Modal animation */
-.modal.fade .modal-dialog {
-  transition: transform 0.25s ease-out;
-}
 
 .modal.fade .modal-dialog {
   transform: scale(0.95);
+  transition: transform 0.25s ease-out;
 }
 
 .modal.show .modal-dialog {
@@ -181,57 +208,62 @@ body {
   --bs-accordion-bg: transparent;
 }
 
-/* Card */
 .accordion-item {
   border: none;
   margin-bottom: 12px;
   border-radius: 14px;
   overflow: hidden;
+
   background: #fff;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.08);
 }
 
-/* Button base */
 .accordion-button {
   background: #fff;
   color: #212529;
+
   font-weight: 600;
+  font-size: 1rem;
+
   padding: 18px;
+
   box-shadow: none !important;
 }
 
-/* Open state */
 .accordion-button:not(.collapsed) {
   background: #0d6efd;
   color: #fff;
 }
 
-/* Focus */
 .accordion-button:focus {
   box-shadow: none !important;
 }
 
-/* Body */
-.accordion-body {
-  background: #f8f9fa;
-  padding: 18px;
-  font-size: 0.95rem;
-  color: #333;
-}
-
-/* Arrow */
 .accordion-button::after {
   transition: transform 0.2s ease;
 }
 
+.accordion-body {
+  background: #f8f9fa;
+  padding: 18px;
+
+  font-size: 0.95rem;
+  line-height: 1.6;
+
+  color: #333;
+}
+
 /* =========================
-   PAGE: HOMEPAGE ONLY
+   PAGE: HOMEPAGE
    ========================= */
 
 .home-page .hero {
-  background-image: linear-gradient(
-      rgba(0, 0, 0, 0.65),
-      rgba(0, 0, 0, 0.65)
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.65)
     ),
     url("../images/boekenkast-home-achtergrond.jpeg");
 
@@ -247,10 +279,10 @@ body {
 
   text-align: center;
   color: white;
+
   padding: 40px 20px;
 }
 
-/* Hero text */
 .home-page .hero-title {
   font-size: clamp(2.5rem, 6vw, 4.5rem);
   font-weight: bold;
@@ -259,6 +291,7 @@ body {
 
 .home-page .title-highlight {
   background: linear-gradient(45deg, #0d6efd, #66b2ff);
+
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -266,32 +299,33 @@ body {
 
 .home-page .hero-subtitle {
   font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-  color: rgba(255, 255, 255, 0.9);
+
+  color: rgba(255,255,255,0.9);
+
   margin-bottom: 25px;
 }
 
-/* Hero button */
 .home-page .btn-primary {
   border-radius: 30px;
   padding: 12px 28px;
-  transition: all 0.3s ease;
 }
 
 .home-page .btn-primary:hover {
-  transform: translateY(-2px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.3);
 }
 
-/* Hero cards */
 .home-page .hero .card {
   border-radius: 16px;
   border: none;
+
   transition: all 0.3s ease;
 }
 
 .home-page .hero .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.25);
 }
 
 .home-page .hero .card h3 {
@@ -299,20 +333,45 @@ body {
   margin-bottom: 15px;
 }
 
-/* Animation */
-.home-page .container {
-  animation: fadeInUp 1s ease;
+/* =========================
+   PAGE: HELP
+   ========================= */
+
+.help-page .contact-card {
+  border: none;
+  border-radius: 18px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.help-page .contact-card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 8px 22px rgba(0,0,0,0.12);
+}
+
+.help-page .contact-card h4 {
+  font-size: 1.2rem;
 }
 
 /* =========================
    ANIMATIONS
    ========================= */
 
+main,
+section {
+  animation: fadeInUp 0.5s ease;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(25px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);

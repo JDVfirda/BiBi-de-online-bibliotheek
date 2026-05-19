@@ -1,9 +1,13 @@
+# Improved `help.html`
+
+```html
 <!DOCTYPE html>
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Help - BiBi.nl</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -13,277 +17,354 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container">
     <a class="navbar-brand" href="index.html">BiBi.nl</a>
-    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+
+    <button class="navbar-toggler"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="menu">
       <ul class="navbar-nav ms-auto">
+
         <li class="nav-item ms-3" id="nav-login">
-          <a href="#" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#loginModal">Log in</a>
+          <a href="#"
+             class="btn btn-outline-light"
+             data-bs-toggle="modal"
+             data-bs-target="#loginModal">
+             Log in
+          </a>
         </li>
+
         <li class="nav-item ms-3 d-none" id="nav-gebruiker">
-          <span class="navbar-text text-white me-2">Welkom, <span id="nav-voornaam"></span>!</span>
-          <a href="#" class="btn btn-outline-light" onclick="uitloggen()">Uitloggen</a>
+          <span class="navbar-text text-white me-2">
+            Welkom, <span id="nav-voornaam"></span>!
+          </span>
+
+          <a href="#"
+             class="btn btn-outline-light"
+             onclick="uitloggen()">
+             Uitloggen
+          </a>
         </li>
-        <li class="nav-item"><a class="nav-link text-white" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="catalog.html">Catalogus</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="mybooks.html">Mijn Boeken</a></li>
-        <li class="nav-item"><a class="nav-link text-white" href="account.html">Account</a></li>
-        <li class="nav-item"><a class="nav-link active text-white" href="help.html">Help</a></li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white" href="index.html">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white" href="catalog.html">Catalogus</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white" href="mybooks.html">Mijn Boeken</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link text-white" href="account.html">Account</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link active text-white" href="help.html">Help</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- Help Content -->
-<section class="container my-5">
-  <h1>Contact</h1>
-  <ul>
-    <li>Telefoon: 0123-456789</li>
-    <li>E-mail: info@bibi.nl</li>
-    <li>Adres: Bibliotheekstraat 1, 1234 AB, Stad</li>
-  </ul>
+<!-- HERO -->
+<section class="bg-light border-bottom py-5">
+  <div class="container text-center">
 
-  <h2 class="mt-4">Veelgestelde vragen</h2>
+    <h1 class="fw-bold display-5 mb-3">
+      Hoe kunnen we je helpen?
+    </h1>
+
+    <p class="text-muted fs-5 mb-0">
+      Vind antwoorden op veelgestelde vragen of neem contact op met onze klantenservice.
+    </p>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="container my-5">
+
+  <div class="row g-4 mb-5">
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 text-center">
+        <div class="card-body p-4">
+          <h4 class="fw-bold mb-3">Telefoon</h4>
+          <p class="text-muted mb-0">
+            020 - 123 45 67
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 text-center">
+        <div class="card-body p-4">
+          <h4 class="fw-bold mb-3">E-mail</h4>
+          <p class="text-muted mb-0">
+            support@bibi.nl
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card border-0 shadow-sm h-100 text-center">
+        <div class="card-body p-4">
+          <h4 class="fw-bold mb-3">Adres</h4>
+          <p class="text-muted mb-0">
+            Bibliotheekstraat 12<br>
+            1012 AB Amsterdam
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FAQ -->
+  <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+    <div>
+      <h2 class="fw-bold mb-1">Veelgestelde vragen</h2>
+      <p class="text-muted mb-0">
+        Alles wat je moet weten over lenen, reserveren en je account.
+      </p>
+    </div>
+  </div>
 
   <div class="accordion" id="faqAccordion">
 
     <!-- 1 -->
     <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q1">
+      <h2 class="accordion-header" id="heading1">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#q1">
           Moet ik een account aanmaken om boeken te lenen?
         </button>
       </h2>
-      <div id="q1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+
+      <div id="q1"
+           class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion"
+           aria-labelledby="heading1">
+
         <div class="accordion-body">
-          Ja, een account is nodig om boeken te lenen en je uitleengeschiedenis bij te houden.
+          Ja, een account is nodig om boeken te lenen, reserveringen te plaatsen en je uitleengeschiedenis te bekijken.
         </div>
       </div>
     </div>
 
     <!-- 2 -->
     <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q2">
-          Hoe kan ik mijn wachtwoord resetten?
+      <h2 class="accordion-header" id="heading2">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#q2">
+          Hoe reset ik mijn wachtwoord?
         </button>
       </h2>
-      <div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+
+      <div id="q2"
+           class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion"
+           aria-labelledby="heading2">
+
         <div class="accordion-body">
-          Klik op "Wachtwoord vergeten?" op de inlogpagina en volg de instructies.
+          Klik op “Wachtwoord vergeten?” op de inlogpagina en volg de instructies in de e-mail.
         </div>
       </div>
     </div>
 
     <!-- 3 -->
     <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q3">
-          Kan ik boeken reserveren?
+      <h2 class="accordion-header" id="heading3">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#q3">
+          Hoe reserveer ik een boek?
         </button>
       </h2>
-      <div id="q3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+
+      <div id="q3"
+           class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion"
+           aria-labelledby="heading3">
+
         <div class="accordion-body">
-          Ja, je kunt boeken reserveren via de catalogus.
+          Via de catalogus kun je een boek selecteren en reserveren wanneer het momenteel niet beschikbaar is.
         </div>
       </div>
     </div>
 
     <!-- 4 -->
     <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q4">
-          Wat zijn de openingstijden van de bibliotheek?
+      <h2 class="accordion-header" id="heading4">
+        <button class="accordion-button collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#q4">
+          Hoe lang mag ik een boek lenen?
         </button>
       </h2>
-      <div id="q4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+
+      <div id="q4"
+           class="accordion-collapse collapse"
+           data-bs-parent="#faqAccordion"
+           aria-labelledby="heading4">
+
         <div class="accordion-body">
-          Maandag t/m vrijdag: 09:00 – 18:00<br>
-          Zaterdag: 10:00 – 16:00
+          De standaard uitleentijd is 3 weken. Verlengen is mogelijk zolang er geen actieve reserveringen zijn.
         </div>
       </div>
     </div>
 
-    <!-- 5 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q5">
-          Krijg ik een melding als mijn gereserveerde boek beschikbaar is?
-        </button>
-      </h2>
-      <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Ja, je ontvangt een e-mailmelding zodra je boek beschikbaar is.
-        </div>
-      </div>
+   <!-- 5 -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q5">
+      Krijg ik een melding als mijn gereserveerde boek beschikbaar is?
+    </button>
+  </h2>
+  <div id="q5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+    <div class="accordion-body">
+      Op dit moment kun je je reserveringen bekijken via “Mijn Boeken”.
     </div>
-
-    <!-- 6 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q6">
-          Krijg ik een digitale versie van het boek?
-        </button>
-      </h2>
-      <div id="q6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Ja, als het beschikbaar is kun je een digitale versie bekijken, zolang het fysieke boek op jou naam staat uitgeleend.
-        </div>
-      </div>
-    </div>
-
-    <!-- 7 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q7">
-          Hoe kan ik contact opnemen met de klantenservice?
-        </button>
-      </h2>
-      <div id="q7" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Via telefoon, e-mail of door langs te komen tijdens openingstijden.
-        </div>
-      </div>
-    </div>
-
-    <!-- 8 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q8">
-          Wat moet ik doen als ik een boek beschadigd terugbreng?
-        </button>
-      </h2>
-      <div id="q8" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Neem contact op met de klantenservice. Mogelijk worden kosten in rekening gebracht.
-        </div>
-      </div>
-    </div>
-
-    <!-- 9 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q9">
-          Wat is het maximale aantal boeken dat ik kan lenen?
-        </button>
-      </h2>
-      <div id="q9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Je kunt maximaal 5 boeken lenen, afhankelijk van je accountstatus.
-        </div>
-      </div>
-    </div>
-
-    <!-- 10 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q10">
-          Wat is de maximale uitleentijd?
-        </button>
-      </h2>
-      <div id="q10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          De uitleentijd is 3 weken. Verlengen is mogelijk als er geen reservering is.
-        </div>
-      </div>
-    </div>
-
-    <!-- 11 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q11">
-          Wat gebeurt er als ik een boek te laat terugbreng?
-        </button>
-      </h2>
-      <div id="q11" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Er kunnen boetes in rekening worden gebracht afhankelijk van de vertraging.
-        </div>
-      </div>
-    </div>
-
-    <!-- 12 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q12">
-          Wat moet ik doen als ik een boek kwijt ben?
-        </button>
-      </h2>
-      <div id="q12" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Neem contact op met de klantenservice. Er kunnen vervangingskosten gelden.
-        </div>
-      </div>
-    </div>
-
-    <!-- 13 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q13">
-          Hoe kan ik een boek verlengen?
-        </button>
-      </h2>
-      <div id="q13" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Via je accountpagina, zolang er geen reserveringen zijn.
-        </div>
-      </div>
-    </div>
-
-    <!-- 14 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q14">
-          Hoe kan ik een boek reserveren?
-        </button>
-      </h2>
-      <div id="q14" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Via de catalogus. Selecteer het boek en volg de stappen.
-        </div>
-      </div>
-    </div>
-
-    <!-- 15 -->
-    <div class="accordion-item">
-      <h2 class="accordion-header">
-        <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q15">
-          Hoe kan ik een boek terugbrengen?
-        </button>
-      </h2>
-      <div id="q15" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-        <div class="accordion-body">
-          Breng het boek naar de balie of gebruik de inleverbox.
-        </div>
-      </div>
-    </div>
-
   </div>
-</section>
+</div>
 
+<!-- 6 -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q6">
+      Krijg ik een digitale versie van het boek?
+    </button>
+  </h2>
+  <div id="q6" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+    <div class="accordion-body">
+      Nee, momenteel zijn alleen fysieke boeken beschikbaar.
+    </div>
+  </div>
+</div>
+
+<!-- 9 -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q9">
+      Wat is het maximale aantal boeken dat ik kan lenen?
+    </button>
+  </h2>
+  <div id="q9" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+    <div class="accordion-body">
+      Er is momenteel geen vaste limiet ingesteld.
+    </div>
+  </div>
+</div>
+
+<!-- 10 -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q10">
+      Wat is de maximale uitleentijd?
+    </button>
+  </h2>
+  <div id="q10" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+    <div class="accordion-body">
+      Boeken blijven geleend totdat ze worden teruggebracht.
+    </div>
+  </div>
+</div>
+
+<!-- 11 -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q11">
+      Wat gebeurt er als ik een boek te laat terugbreng?
+    </button>
+  </h2>
+  <div id="q11" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+    <div class="accordion-body">
+      Op dit moment worden er nog geen automatische boetes verwerkt.
+    </div>
+  </div>
+</div>
+
+<!-- 13 -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q13">
+      Hoe kan ik een boek verlengen?
+    </button>
+  </h2>
+  <div id="q13" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+    <div class="accordion-body">
+      Verlengen is momenteel nog niet beschikbaar.
+    </div>
+  </div>
+</div>
+
+<!-- 15 -->
+<div class="accordion-item">
+  <h2 class="accordion-header">
+    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#q15">
+      Hoe kan ik een boek terugbrengen?
+    </button>
+  </h2>
+  <div id="q15" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+    <div class="accordion-body">
+      Via “Mijn Boeken” kun je een geleend boek terugbrengen.
+    </div>
+  </div>
+</div>
 
 <!-- Login Modal -->
 <div class="modal fade" id="loginModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
+
       <div class="modal-header">
         <h5 class="modal-title">Inloggen</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="modal">
+        </button>
       </div>
+
       <div class="modal-body">
+
         <form>
+
           <div class="mb-3">
             <label class="form-label">Gebruikersnaam/E-mail</label>
             <input type="text" class="form-control">
           </div>
+
           <div class="mb-3">
             <label class="form-label">Wachtwoord</label>
             <input type="password" class="form-control">
           </div>
-          <button type="submit" class="btn btn-primary w-100">Inloggen</button>
-          <a href="register.html" class="d-block text-center text-primary mt-3">Nog geen account? Klik hier!</a>
-          <a href="lostpassword.html" class="d-block text-center text-primary mt-3">Wachtwoord vergeten?</a>
+
+          <button type="submit"
+                  class="btn btn-primary w-100">
+                  Inloggen
+          </button>
+
+          <a href="register.html"
+             class="d-block text-center text-primary mt-3">
+             Nog geen account? Klik hier!
+          </a>
+
+          <a href="lostpassword.html"
+             class="d-block text-center text-primary mt-3">
+             Wachtwoord vergeten?
+          </a>
+
         </form>
       </div>
     </div>
@@ -291,11 +372,12 @@
 </div>
 
 <!-- Footer -->
-<footer class="footer text-center p-1">
+<footer class="footer text-center p-2">
   <p class="mb-0">© 2026 BiBi.nl</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/login.js"></script>
+
 </body>
 </html>
