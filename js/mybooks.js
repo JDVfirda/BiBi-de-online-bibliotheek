@@ -1,29 +1,76 @@
 const mybooks = document.getElementById('mybooks');
 
-const myBooksList = [
-  { title: "No books yet :(", author: "", img: "https://via.placeholder.com/150x200" }
-];
+function loadMyBooks() {
+    const klant_id = localStorage.getItem("klant_id");
+
+    if (!klant_id) return;
+
+    fetch(`backend/mijn_boeken.php?klant_id=${klant_id}`)
+        .then(r => r.json())
+        .then(data => displayMyBooks(data))
+        .catch(err => console.error(err));
+}
 
 function displayMyBooks(list) {
-  if (!mybooks) return; // Safety: only run if element exists
+    mybooks.innerHTML = '';
 
-  mybooks.innerHTML = '';
-  list.forEach(book => {
-    mybooks.innerHTML += `
-      <div class="col-12 col-md-6 mb-4">
-        <div class="card book-card">
-          <img src="${book.img}" alt="${book.title}" class="card-img-top">
-          <div class="book-card-body p-3">
-            <div class="book-card-title fw-semibold mb-1">${book.title}</div>
-            <div class="book-card-author text-muted mb-2">${book.author}</div>
-          </div>
-        </div>
-      </div>
-    `;
-  });
+    if (!list.length) {
+        mybooks.innerHTML = `<p class="text-muted">Je hebt nog geen boeken.</p>`;
+        return;
+    }
+
+    list.forEach(book => {
+        mybooks.innerHTML += `
+            <div class="col-12 col-md-6 mb-4">
+                <div class="card book-card">
+                    <div class="book-card-body p-3">
+
+                        <div class="fw-semibold">${book.titel}</div>
+                        <div class="text-muted">${book.auteur}</div>
+
+                        <span class="badge bg-${
+                            book.status === 'geleend' ? 'primary' : 'warning'
+                        }">
+                            ${book.status}
+                        </span>
+
+                        <div class="mt-2">
+                            ${
+                                book.status === "geleend"
+                                    ? `<button class="btn btn-sm btn-success" onclick="returnBook(${book.id})">Terugbrengen</button>`
+                                    : `<button class="btn btn-sm btn-warning" onclick="cancelReservation(${book.id})">Annuleren</button>`
+                            }
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        `;
+    });
 }
 
-// Initialize only if element exists
-if (mybooks) {
-  displayMyBooks(myBooksList);
+// ACTIONS
+function returnBook(id) {
+    fetch("backend/terugbrengen.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            boek_id: id,
+            klant_id: localStorage.getItem("klant_id")
+        })
+    }).then(() => loadMyBooks());
 }
+
+function cancelReservation(id) {
+    fetch("backend/reservering_annuleren.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            boek_id: id,
+            klant_id: localStorage.getItem("klant_id")
+        })
+    }).then(() => loadMyBooks());
+}
+
+// INIT
+if (mybooks) loadMyBooks();
