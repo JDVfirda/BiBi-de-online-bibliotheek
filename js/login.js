@@ -49,12 +49,11 @@ function controleerIngelogd() {
 }
 
 function uitloggen() {
-    // Verwijder alle gegevens uit localStorage
-    localStorage.removeItem('ingelogd');
-    localStorage.removeItem('voornaam');
-    localStorage.removeItem('gebruikersnaam');
-
-    window.location.href = 'index.html';
+    fetch('backend/logout.php')
+        .then(() => {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
