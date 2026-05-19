@@ -14,9 +14,9 @@ $methode = $_SERVER['REQUEST_METHOD'];
 
 switch ($methode) {
 
-case 'GET':
+    case 'GET':
 
-$sql = "
+        $sql = "
 SELECT 
     b.*,
 
@@ -59,67 +59,59 @@ LEFT JOIN voorraad v
 GROUP BY b.id
 ";
 
-$result = $verbinding->query($sql);
+        $result = $verbinding->query($sql);
 
-if (!$result) {
-    echo json_encode([
-        "error" => "SQL error",
-        "message" => $verbinding->error
-    ]);
-    exit;
-}
+        if (!$result) {
+            echo json_encode(['succes' => false, 'fout' => $verbinding->error]);
+            exit;
+        }
 
-$boeken = [];
+        $boeken = [];
+        while ($row = $result->fetch_assoc()) {
+            $boeken[] = $row;
+        }
 
-while ($row = $result->fetch_assoc()) {
-    $boeken[] = $row;
-}
+        echo json_encode($boeken);
+        break;
 
-echo json_encode($boeken);
+    // Boek toevoegen
+    case 'POST':
+        $data = json_decode(file_get_contents('php://input'), true);
 
-break;
+        $titel = $verbinding->real_escape_string($data['titel']);
+        $auteur = $verbinding->real_escape_string($data['auteur']);
+        $uitgever = $verbinding->real_escape_string($data['uitgever']);
+        $taal = $verbinding->real_escape_string($data['taal']);
+        $pagina_aantal = intval($data['pagina_aantal']);
+        $genre = $verbinding->real_escape_string($data['genre']);
+        $isbn = $verbinding->real_escape_string($data['isbn']);
+        $publicatiedatum = $verbinding->real_escape_string($data['publicatiedatum']);
 
-case 'POST':
+        $sql = "INSERT INTO boeken (titel, auteur, uitgever, taal, pagina_aantal, genre, isbn, publicatiedatum)
+                VALUES ('$titel', '$auteur', '$uitgever', '$taal', $pagina_aantal, '$genre', '$isbn', '$publicatiedatum')";
 
-$data = json_decode(file_get_contents('php://input'), true);
+        if ($verbinding->query($sql)) {
+            echo json_encode(['succes' => true]);
+        } else {
+            echo json_encode(['succes' => false, 'fout' => $verbinding->error]);
+        }
+        break;
 
-$titel = $verbinding->real_escape_string($data['titel']);
-$auteur = $verbinding->real_escape_string($data['auteur']);
-$uitgever = $verbinding->real_escape_string($data['uitgever']);
-$taal = $verbinding->real_escape_string($data['taal']);
-$pagina_aantal = intval($data['pagina_aantal']);
-$genre = $verbinding->real_escape_string($data['genre']);
-$isbn = $verbinding->real_escape_string($data['isbn']);
-$publicatiedatum = $verbinding->real_escape_string($data['publicatiedatum']);
+    // Boek verwijderen   
+    case 'DELETE':
 
-$sql = "INSERT INTO boeken 
-(titel, auteur, uitgever, taal, pagina_aantal, genre, isbn, publicatiedatum)
-VALUES 
-('$titel', '$auteur', '$uitgever', '$taal', $pagina_aantal, '$genre', '$isbn', '$publicatiedatum')";
+        $data = json_decode(file_get_contents('php://input'), true);
+        $id = intval($data['id']);
 
-if ($verbinding->query($sql)) {
-    echo json_encode(['succes' => true]);
-} else {
-    echo json_encode(['succes' => false, 'fout' => $verbinding->error]);
-}
+        $sql = "DELETE FROM boeken WHERE id = $id";
 
-break;
+        if ($verbinding->query($sql)) {
+            echo json_encode(['succes' => true]);
+        } else {
+            echo json_encode(['succes' => false, 'fout' => $verbinding->error]);
+        }
 
-case 'DELETE':
-
-$data = json_decode(file_get_contents('php://input'), true);
-$id = intval($data['id']);
-
-$sql = "DELETE FROM boeken WHERE id = $id";
-
-if ($verbinding->query($sql)) {
-    echo json_encode(['succes' => true]);
-} else {
-    echo json_encode(['succes' => false, 'fout' => $verbinding->error]);
-}
-
-break;
-
+        break;
 }
 
 $verbinding->close();
