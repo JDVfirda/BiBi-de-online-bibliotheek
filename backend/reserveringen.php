@@ -1,4 +1,5 @@
 <?php
+// Een programma waarmee een gebruiker een boek kan reserveren (POST) naar de database
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');

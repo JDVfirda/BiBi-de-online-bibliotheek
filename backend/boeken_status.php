@@ -1,4 +1,5 @@
 <?php
+// Een programma waarmee de status van alle boeken kan worden opgevraagd (GET) uit de database
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 

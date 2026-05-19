@@ -1,3 +1,4 @@
+// een programma waarmee de boeken van een gebruiker worden weergegeven en gebruikers boeken kunnen terugbrengen of reserveringen kunnen annuleren
 const mybooks = document.getElementById('mybooks');
 
 function loadMyBooks() {

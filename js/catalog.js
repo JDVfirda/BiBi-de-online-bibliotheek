@@ -1,3 +1,4 @@
+// een programma waarmee de catalogus van boeken wordt weergegeven en gebruikers boeken kunnen bekijken, lenen of reserveren
 const catalog = document.getElementById('catalog');
 
 let currentBook = null;

@@ -1,4 +1,5 @@
 <?php
+// Een programma waarmee een gebruiker zijn geleende en gereserveerde boeken kan zien (GET) uit de database
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
