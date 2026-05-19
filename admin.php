@@ -2,11 +2,13 @@
 session_start();
 
 if (!isset($_SESSION['role'])) {
-    die("Je moet eerst inloggen");
+    header('Location: index.html');
+    exit();
 }
 
 if ($_SESSION['role'] !== 'admin') {
-    die("Geen toegang");
+    header('Location: index.html');
+    exit();
 }
 ?>
 
