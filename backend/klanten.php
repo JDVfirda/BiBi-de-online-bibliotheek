@@ -4,7 +4,7 @@
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, DELETE');
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
 header('Access-Control-Allow-Headers: Content-Type');
 
 
@@ -13,7 +13,7 @@ require_once 'config/database.php';
 $methode = $_SERVER['REQUEST_METHOD'];
 
 switch ($methode) {
-    
+
     case 'GET':
         if (isset($_GET['gebruikersnaam'])) {
             $gebruikersnaam = $verbinding->real_escape_string($_GET['gebruikersnaam']);
@@ -21,11 +21,11 @@ switch ($methode) {
             $klant = $resultaat->fetch_assoc();
             echo json_encode($klant);
         } else {
-        $resultaat = $verbinding->query('SELECT * FROM klanten');
-        $klanten = [];
+            $resultaat = $verbinding->query('SELECT * FROM klanten');
+            $klanten = [];
 
-        while ($rij = $resultaat->fetch_assoc()) {
-            $klanten[] = $rij;
+            while ($rij = $resultaat->fetch_assoc()) {
+                $klanten[] = $rij;
             }
             echo json_encode($klanten);
         }
@@ -45,6 +45,34 @@ switch ($methode) {
 
         $sql = "INSERT INTO klanten (voornaam, achternaam, gebruikersnaam, email, wachtwoord, telefoon)
                 VALUES ('$voornaam', '$achternaam', '$gebruikersnaam', '$email', '$wachtwoord', '$telefoonnummer')";
+
+        if ($verbinding->query($sql)) {
+            echo json_encode(['succes' => true]);
+        } else {
+            echo json_encode(['succes' => false, 'fout' => $verbinding->error]);
+        }
+        break;
+
+    // Klant bewerken
+    case 'PUT':
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        $id = intval($data['id']);
+        $voornaam = $verbinding->real_escape_string($data['voornaam']);
+        $achternaam = $verbinding->real_escape_string($data['achternaam']);
+        $gebruikersnaam = $verbinding->real_escape_string($data['gebruikersnaam']);
+        $email = $verbinding->real_escape_string($data['email']);
+        $telefoon = $verbinding->real_escape_string($data['telefoon']);
+        $is_admin = intval($data['is_admin']);
+
+        $sql = "UPDATE klanten SET 
+                voornaam = '$voornaam',
+                achternaam = '$achternaam',
+                gebruikersnaam = '$gebruikersnaam',
+                email = '$email',
+                telefoon = '$telefoon',
+                is_admin = $is_admin
+            WHERE id = $id";
 
         if ($verbinding->query($sql)) {
             echo json_encode(['succes' => true]);
