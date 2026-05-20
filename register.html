@@ -7,7 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="register-page">
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -37,39 +37,65 @@
 
 <!-- Register Form -->
 <section class="container my-5">
-  <div class="mx-auto" style="max-width: 400px;">
-    <form onsubmit="registreer(event)">
+  <div class="mx-auto register-box">
+
+    <form onsubmit="registreer(event)" novalidate>
+
+      <!-- Voornaam -->
       <div class="mb-3">
-        <label class="form-label">Voornaam</label>
-        <input type="text" id="voornaam" class="form-control" required>
+        <label for="voornaam" class="form-label">Voornaam</label>
+        <input type="text" id="voornaam" class="form-control" minlength="2" maxlength="50" required>
+        <div class="invalid-feedback">Vul een geldige voornaam in.</div>
       </div>
+
+      <!-- Achternaam -->
       <div class="mb-3">
-        <label class="form-label">Achternaam</label>
-        <input type="text" id="achternaam"class="form-control" required>
+        <label for="achternaam" class="form-label">Achternaam</label>
+        <input type="text" id="achternaam" class="form-control" minlength="2" maxlength="50" required>
+        <div class="invalid-feedback">Vul een geldige achternaam in.</div>
       </div>
+
+      <!-- Gebruikersnaam -->
       <div class="mb-3">
-        <label class="form-label">Gebruikersnaam</label>
-        <input type="text" id="gebruikersnaam"class="form-control" required>
+        <label for="gebruikersnaam" class="form-label">Gebruikersnaam</label>
+        <input type="text" id="gebruikersnaam" class="form-control" minlength="3" maxlength="30" required>
+        <div class="invalid-feedback">Minimaal 3 tekens verplicht.</div>
       </div>
+
+      <!-- Email -->
       <div class="mb-3">
-        <label class="form-label">E-mail</label>
-        <input type="email" id="email" class="form-control" required>
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" id="email" class="form-control" maxlength="255" required>
+        <div class="invalid-feedback">Vul een geldig e-mailadres in.</div>
       </div>
+
+      <!-- Telefoon -->
       <div class="mb-3">
-        <label class="form-label">Telefoonnummer</label>
-        <input type="text" id="telefoonnummer" class="form-control">
+        <label for="telefoonnummer" class="form-label">Telefoonnummer</label>
+        <input type="tel" id="telefoonnummer" class="form-control" pattern="[0-9+\-\s]{8,20}">
+        <div class="invalid-feedback">Vul een geldig telefoonnummer in.</div>
       </div>
+
+      <!-- Wachtwoord -->
       <div class="mb-3">
-        <label class="form-label">Wachtwoord</label>
-        <input type="password" id="wachtwoord" class="form-control" required>
+        <label for="wachtwoord" class="form-label">Wachtwoord</label>
+        <input type="password" id="wachtwoord" class="form-control" minlength="6" required>
+        <div class="invalid-feedback">Minimaal 6 tekens.</div>
       </div>
+
+      <!-- Herhaal wachtwoord -->
       <div class="mb-3">
-        <label class="form-label">Herhaal wachtwoord</label>
-        <input type="password" id="wachtwoord_herhaald" class="form-control" required>
+        <label for="wachtwoord_herhaald" class="form-label">Herhaal wachtwoord</label>
+        <input type="password" id="wachtwoord_herhaald" class="form-control" minlength="6" required>
+        <div class="invalid-feedback">Herhaal het wachtwoord correct.</div>
       </div>
-      <button type="submit" class="btn btn-primary w-100">Registreer</button>
-      <a href="#" class="d-block text-center text-primary mt-3" data-bs-toggle="modal" data-bs-target="#loginModal">Heb je al een account? Klik hier!</a>
+
+      <button type="submit" class="btn btn-primary w-100">
+        Registreer
+      </button>
+
     </form>
+
   </div>
 </section>
 

@@ -33,14 +33,64 @@ function laadBoeken() {
 
 // Voeg een nieuw boek toe aan de database
 function boekToevoegen() {
+
+    const titel = document.getElementById('boek-titel');
+    const auteur = document.getElementById('boek-auteur');
+    const uitgever = document.getElementById('boek-uitgever');
+    const taal = document.getElementById('boek-taal');
+    const paginas = document.getElementById('boek-aantal-paginas');
+    const isbn = document.getElementById('boek-isbn');
+
+    // verwijder spaties voor/achter tekst
+    titel.value = titel.value.trim();
+    auteur.value = auteur.value.trim();
+    uitgever.value = uitgever.value.trim();
+    taal.value = taal.value.trim();
+    isbn.value = isbn.value.trim();
+
+    // alle verplichte velden
+    const velden = [
+        titel,
+        auteur,
+        uitgever,
+        taal,
+        paginas,
+        isbn
+    ];
+
+    let geldig = true;
+
+    velden.forEach(veld => {
+
+        // verwijder oude foutstijl
+        veld.classList.remove('is-invalid');
+
+        // controleer veld
+        if (!veld.checkValidity()) {
+
+    veld.classList.add('is-invalid');
+
+    // toon browser melding
+    veld.reportValidity();
+
+    geldig = false;
+}
+
+    });
+
+    // stop als formulier ongeldig is
+    console.log("formulier geldig:", geldig);
+    if (!geldig) return;
+
+    // boek object
     const boek = {
-        titel: document.getElementById('boek-titel').value,
-        auteur: document.getElementById('boek-auteur').value,
-        uitgever: document.getElementById('boek-uitgever').value,
-        taal: document.getElementById('boek-taal').value,
-        pagina_aantal: document.getElementById('boek-aantal-paginas').value,
+        titel: titel.value,
+        auteur: auteur.value,
+        uitgever: uitgever.value,
+        taal: taal.value,
+        pagina_aantal: paginas.value,
         genre: document.getElementById('boek-genre').value,
-        isbn: document.getElementById('boek-isbn').value,
+        isbn: isbn.value,
         publicatiedatum: document.getElementById('boek-publicatie-datum').value
     };
 
@@ -51,14 +101,33 @@ function boekToevoegen() {
     })
     .then(response => response.json())
     .then(data => {
+
         if (data.succes) {
-            bootstrap.Modal.getInstance(document.getElementById('modalBoekToevoegen')).hide();
+
+            // sluit modal
+            bootstrap.Modal
+                .getInstance(document.getElementById('modalBoekToevoegen'))
+                .hide();
+
+            // reset formulier
+            document.querySelectorAll('#modalBoekToevoegen input')
+                .forEach(input => {
+                    input.value = '';
+                    input.classList.remove('is-invalid');
+                });
+
             laadBoeken();
+
         } else {
+
             document.getElementById('boek-melding').innerHTML = `
-                <div class="alert alert-danger">${data.fout}</div>
+                <div class="alert alert-danger">
+                    ${data.fout}
+                </div>
             `;
+
         }
+
     })
     .catch(error => console.error('Fout bij toevoegen boek:', error));
 }
