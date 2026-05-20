@@ -96,13 +96,13 @@ break;
 
     $data = json_decode(file_get_contents('php://input'), true);
 
-    $uitlening_id = intval($data['uitlening_id']);
+    $uitlening_id = intval($data['id']);
 
-    // 1. haal serienummer op
+    // haal serienummer op van de uitlening
     $sql = "
     SELECT serienummer_id
     FROM uitleningen
-    WHERE uitlening_id = $uitlening_id
+    WHERE id = $uitlening_id
     ";
 
     $resultaat = $verbinding->query($sql);
@@ -115,6 +115,33 @@ break;
         ]);
 
         break;
+    }
+
+    $uitlening = $resultaat->fetch_assoc();
+    $serienummer_id = $uitlening['serienummer_id'];
+
+    // verwijder uitlening
+    $delete_sql = "
+    DELETE FROM uitleningen
+    WHERE id = $uitlening_id
+    ";
+
+    $verbinding->query($delete_sql);
+
+    // zet boek terug op beschikbaar
+    $update_sql = "
+    UPDATE voorraad
+    SET status = 'beschikbaar'
+    WHERE serienummer_id = $serienummer_id
+    ";
+
+    $verbinding->query($update_sql);
+
+    echo json_encode([
+        'succes' => true
+    ]);
+
+    break;
     }
 
     $uitlening = $resultaat->fetch_assoc();
