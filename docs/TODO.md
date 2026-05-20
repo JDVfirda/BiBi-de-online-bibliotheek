@@ -1,4 +1,4 @@
-# BiBi.nl – TODO / Spiekbrief
+# BiBi.nl – TODO
 
 ## 🔐 Login & gebruikersflow
 - [ ] Knop op index aanpassen:
