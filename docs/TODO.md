@@ -1,18 +1,18 @@
-# BiBi.nl – TODO
+# BiBi.nl – TODO / Spiekbrief
 
 ## 🔐 Login & gebruikersflow
-- Knop op index aanpassen:
+- [ ] Knop op index aanpassen:
   - Niet ingelogd → "Registreer nu!"
   - Wel ingelogd → "Naar catalogus!"
 
-- Sessies fixen:
-  - Login status wordt soms niet goed herkend
+- [ ] Sessies fixen:
+  - Loginstatus wordt soms niet goed herkend
   - Navbar moet overal correct updaten (inloggen/uitloggen)
 
 ---
 
 ## 📚 Mijn Boeken pagina
-- UI upgrade van boekkaarten
+- [ ] UI upgrade van boekkaarten
   - Covers toevoegen
   - Meer contrast
   - Hover effecten verbeteren
@@ -21,25 +21,16 @@
 ---
 
 ## ❓ FAQ / Help pagina
-- Inhoud consistent maken
-- Leenregels uitwerken:
+- [ ] Inhoud consistent maken
+- [ ] Leenregels uitwerken:
   - Maximale leentijd instellen (bijv. 14/21 dagen)
   - Automatisch retourdatum berekenen
 
-- Verlengingen toevoegen:
+- [ ] Verlengingen toevoegen:
   - 1 of meerdere verlengingen toestaan
   - Nieuwe retourdatum automatisch updaten
 
 ---
 
-## 🎨 UI / UX
-- Register en lostpassword pagina’s centreren
-- Form layouts consistent maken
-- Validatie feedback overal hetzelfde maken
-
----
-
-## ⚙️ Nice to have
-- Betere foutmeldingen (geen alerts meer)
-- Loading states bij fetch requests
-- Form feedback verbeteren na succes
+## ⚡ Snelle verbeteringen
+- [ ] Admin shortcut maken (snellere toegang / UI knop)
