@@ -1,6 +1,6 @@
 # BiBi.nl – TODO
 
-## 🔐 Login & gebruikersflow
+## Login & gebruikersflow
 - [ ] Knop op index aanpassen:
   - Niet ingelogd → "Registreer nu!"
   - Wel ingelogd → "Naar catalogus!"
@@ -11,7 +11,7 @@
 
 ---
 
-## 📚 Mijn Boeken pagina
+## Mijn Boeken pagina
 - [ ] UI upgrade van boekkaarten
   - Covers toevoegen
   - Meer contrast
@@ -20,7 +20,7 @@
 
 ---
 
-## ❓ FAQ / Help pagina
+## FAQ / Help pagina
 - [ ] Inhoud consistent maken
 - [ ] Leenregels uitwerken:
   - Maximale leentijd instellen (bijv. 14/21 dagen)
@@ -32,5 +32,5 @@
 
 ---
 
-## ⚡ Snelle verbeteringen
+## Snelle verbeteringen
 - [ ] Admin shortcut maken (snellere toegang / UI knop)
