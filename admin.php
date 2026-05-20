@@ -103,7 +103,7 @@ if ($_SESSION['role'] !== 'admin') {
                         <th>Klant</th>
                         <th>Datum uit</th>
                         <th>Datum terug</th>
-                        <th>Acties</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody id="tabel-uitleningen"></tbody>
@@ -276,6 +276,50 @@ if ($_SESSION['role'] !== 'admin') {
                 </button>
             </div>
 
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Klant bewerken -->
+<div class="modal fade" id="modalKlantBewerken" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Klant bewerken</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="edit-klant-melding"></div>
+                <input type="hidden" id="edit-klant-id">
+                <div class="mb-3">
+                    <label class="form-label">Voornaam</label>
+                    <input type="text" id="edit-voornaam" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Achternaam</label>
+                    <input type="text" id="edit-achternaam" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Gebruikersnaam</label>
+                    <input type="text" id="edit-gebruikersnaam" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" id="edit-email" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Telefoon</label>
+                    <input type="text" id="edit-telefoon" class="form-control">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" id="edit-is-admin" class="form-check-input">
+                    <label class="form-check-label">Admin rechten</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuleren</button>
+                <button type="button" class="btn btn-primary" onclick="klantOpslaan()">Opslaan</button>
+            </div>
         </div>
     </div>
 </div>
