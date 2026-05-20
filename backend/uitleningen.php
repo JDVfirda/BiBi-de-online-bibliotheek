@@ -93,7 +93,55 @@ echo json_encode([
 break;
 
     case 'DELETE':
+
+    $data = json_decode(file_get_contents('php://input'), true);
+
+    $uitlening_id = intval($data['uitlening_id']);
+
+    // 1. haal serienummer op
+    $sql = "
+    SELECT serienummer_id
+    FROM uitleningen
+    WHERE uitlening_id = $uitlening_id
+    ";
+
+    $resultaat = $verbinding->query($sql);
+
+    if ($resultaat->num_rows === 0) {
+
+        echo json_encode([
+            'succes' => false,
+            'fout' => 'Uitlening niet gevonden'
+        ]);
+
         break;
-}
+    }
+
+    $uitlening = $resultaat->fetch_assoc();
+    $serienummer_id = $uitlening['serienummer_id'];
+
+    // 2. markeer als teruggebracht
+    $update_uitlening = "
+    UPDATE uitleningen
+    SET datum_terug = NOW()
+    WHERE uitlening_id = $uitlening_id
+    ";
+
+    $verbinding->query($update_uitlening);
+
+    // 3. maak boek weer beschikbaar
+    $update_voorraad = "
+    UPDATE voorraad
+    SET status = 'beschikbaar'
+    WHERE serienummer_id = $serienummer_id
+    ";
+
+    $verbinding->query($update_voorraad);
+
+    echo json_encode([
+        'succes' => true
+    ]);
+
+    break;
 
 $verbinding->close();
