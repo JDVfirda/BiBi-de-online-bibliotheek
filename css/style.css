@@ -358,6 +358,102 @@ main {
 }
 
 /* =========================
+   PAGE: REGISTER
+   ========================= */
+
+.register-page section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+}
+
+.register-page form {
+  width: 100%;
+  max-width: 500px;
+
+  background: #fff;
+
+  padding: 32px;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.08);
+}
+
+.register-page .form-control {
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.register-page .btn-primary {
+  border-radius: 12px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.register-page .invalid-feedback {
+  font-size: 0.9rem;
+}
+
+.register-page form a {
+  text-decoration: none;
+}
+
+.register-page form a:hover {
+  text-decoration: underline;
+}
+
+.register-box {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* =========================
+   PAGE: LOST PASSWORD
+   ========================= */
+
+.lostpassword-page section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+}
+
+.lostpassword-page form {
+  width: 100%;
+  max-width: 500px;
+
+  background: #fff;
+
+  padding: 32px;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.08);
+}
+
+.lostpassword-page .form-control {
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.lostpassword-page .btn-primary {
+  border-radius: 12px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.lostpassword-box {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* =========================
    ANIMATIONS
    ========================= */
 

@@ -114,52 +114,168 @@ if ($_SESSION['role'] !== 'admin') {
 </div>
 
 <!-- Modal: Boek toevoegen -->
+<!-- Modal: Boek toevoegen -->
 <div class="modal fade" id="modalBoekToevoegen" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
+
             <div class="modal-header">
                 <h5 class="modal-title">Boek toevoegen</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
+
             <div class="modal-body">
+
                 <div id="boek-melding"></div>
+
+                <!-- Titel -->
                 <div class="mb-3">
-                    <label class="form-label">Titel</label>
-                    <input type="text" id="boek-titel" class="form-control" required>
+                    <label for="boek-titel" class="form-label">Titel</label>
+                    <input
+    type="text"
+    id="boek-titel"
+    class="form-control"
+    minlength="2"
+    maxlength="255"
+    required
+>
+                    <div class="invalid-feedback">
+                       Minimaal 2 tekens verplicht.
+                    </div>
                 </div>
+
+                <!-- Auteur -->
                 <div class="mb-3">
-                    <label class="form-label">Auteur</label>
-                    <input type="text" id="boek-auteur" class="form-control" required>
+                    <label for="boek-auteur" class="form-label">Auteur</label>
+                    <input
+    type="text"
+    id="boek-auteur"
+    class="form-control"
+    minlength="2"
+    maxlength="255"
+    required
+>
+                    <div class="invalid-feedback">
+                        Minimaal 2 tekens verplicht.
+                    </div>
                 </div>
+
+                <!-- Uitgever -->
                 <div class="mb-3">
-                    <label class="form-label">Uitgever</label>
-                    <input type="text" id="boek-uitgever" class="form-control" required>
-                </div>                
-                <div class="mb-3">
-                    <label class="form-label">Taal</label>
-                    <input type="text" id="boek-taal" class="form-control" required>
+                    <label for="boek-uitgever" class="form-label">Uitgever</label>
+                    <input
+    type="text"
+    id="boek-uitgever"
+    class="form-control"
+    minlength="2"
+    maxlength="255"
+    required
+>
+                    <div class="invalid-feedback">
+                        Minimaal 2 tekens verplicht.
+                    </div>
                 </div>
+
+                <!-- Taal -->
                 <div class="mb-3">
-                    <label class="form-label">Aantal pagina's</label>
-                    <input type="text" id="boek-aantal-paginas" class="form-control" required>
+                    <label for="boek-taal" class="form-label">Taal</label>
+                   <input
+    type="text"
+    id="boek-taal"
+    class="form-control"
+    minlength="2"
+    maxlength="30"
+    required
+>
+                    <div class="invalid-feedback">
+                        Minimaal 2 tekens verplicht.
+                    </div>
                 </div>
+
+                <!-- Pagina's -->
                 <div class="mb-3">
-                    <label class="form-label">Genre</label>
-                    <input type="text" id="boek-genre" class="form-control">
-                </div>                
-                <div class="mb-3">
-                    <label class="form-label">ISBN</label>
-                    <input type="text" id="boek-isbn" class="form-control" required>
+                    <label for="boek-aantal-paginas" class="form-label">
+                        Aantal pagina's
+                    </label>
+
+                    <input
+                        type="number"
+                        id="boek-aantal-paginas"
+                        class="form-control"
+                        min="1"
+                        max="10000"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Vul een geldig aantal pagina's in.
+                    </div>
                 </div>
+
+                <!-- Genre -->
                 <div class="mb-3">
-                    <label class="form-label">Publicatie datum</label>
-                    <input type="date" id="boek-publicatie-datum" class="form-control">
+                    <label for="boek-genre" class="form-label">Genre</label>
+
+          <input
+    type="text"
+    id="boek-genre"
+    class="form-control"
+    maxlength="100"
+>
                 </div>
+
+                <!-- ISBN -->
+                <div class="mb-3">
+                    <label for="boek-isbn" class="form-label">ISBN</label>
+
+                    <input
+    type="text"
+    id="boek-isbn"
+    class="form-control"
+    pattern="[0-9\-]{10,20}"
+    required
+>
+
+                    <div class="invalid-feedback">
+    Gebruik een geldig ISBN nummer.
+</div>
+                </div>
+
+                <!-- Publicatie datum -->
+                <div class="mb-3">
+                    <label for="boek-publicatie-datum" class="form-label">
+                        Publicatie datum
+                    </label>
+
+                   <input
+    type="date"
+    id="boek-publicatie-datum"
+    class="form-control"
+    max="2026-05-20"
+>
+                </div>
+
             </div>
+
+            <!-- FOOTER -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuleren</button>
-                <button type="button" class="btn btn-primary" onclick="boekToevoegen()">Opslaan</button>
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                >
+                    Annuleren
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="boekToevoegen()"
+                >
+                    Opslaan
+                </button>
             </div>
+
         </div>
     </div>
 </div>
